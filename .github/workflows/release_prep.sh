@@ -30,7 +30,7 @@ cat << EOF
 2. Add to your \`MODULE.bazel\` file:
 
 \`\`\`starlark
-bazel_dep(name = "com_myorg_rules_mylang", version = "${TAG:1}")
+bazel_dep(name = "kmp", version = "${TAG:1}")
 \`\`\`
 
 ## Using WORKSPACE
@@ -40,10 +40,10 @@ Paste this snippet into your \`WORKSPACE.bazel\` file:
 \`\`\`starlark
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
-    name = "com_myorg_rules_mylang",
+    name = "kmp",
     sha256 = "${SHA}",
     strip_prefix = "${PREFIX}",
-    url = "https://github.com/myorg/rules_mylang/releases/download/${TAG}/${ARCHIVE}",
+    url = "https://github.com/ArchangelX360/kotlin_multiplatform_dependencies/releases/download/${TAG}/${ARCHIVE}",
 )
 EOF
 

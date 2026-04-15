@@ -121,6 +121,33 @@
   },
   "selectedYankedVersions": {},
   "moduleExtensions": {
+    "//kmp:extensions.bzl%kmp": {
+      "general": {
+        "bzlTransitiveDigest": "faGSeQ1QOBIRWyEdNqLVUs+kirkr882AXVW0r9LJVGw=",
+        "usagesDigest": "/hMAsd89REtyduDRjAUJQ6I6B1fKq/ir6344EhgsDNA=",
+        "recordedFileInputs": {},
+        "recordedDirentsInputs": {},
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "kmp_deps": {
+            "bzlFile": "@@//kmp/private/extensions:kmp.bzl",
+            "ruleClassName": "_kmp_deps_repository",
+            "attributes": {
+              "deps": []
+            }
+          }
+        },
+        "moduleExtensionMetadata": {
+          "explicitRootModuleDirectDeps": [
+            "kmp_deps"
+          ],
+          "explicitRootModuleDirectDevDeps": [],
+          "useAllRepos": "NO",
+          "reproducible": false
+        },
+        "recordedRepoMappingEntries": []
+      }
+    },
     "@@apple_support~//crosstool:setup.bzl%apple_cc_configure_extension": {
       "general": {
         "bzlTransitiveDigest": "PjIds3feoYE8SGbbIq2SFTZy3zmxeO2tQevJZNDo7iY=",
