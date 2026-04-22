@@ -14,6 +14,10 @@ common --config=ruleset
 # Required until this is the default; expected in Bazel 7
 common --enable_bzlmod
 
+# The resolver needs the java.net.http module used by Amper. Use Bazel's downloaded JDK instead
+# of a host/local runtime, which may be a trimmed image.
+common --java_runtime_version=remotejdk_21
+
 # Ensure that the MODULE.bazel.lock file is complete and committed.
 # This is an important security measure: it ensures that developers on the
 # same rule set download dependencies at the same versions with the same bits.

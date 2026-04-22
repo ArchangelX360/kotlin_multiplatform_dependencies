@@ -1,0 +1,66 @@
+load("@rules_java//java:defs.bzl", "java_binary")
+load("@rules_jvm_external//:defs.bzl", "artifact")
+load("@rules_kotlin//kotlin:core.bzl", "kt_compiler_plugin")
+load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library", "kt_jvm_test")
+
+package(default_visibility = ["//visibility:public"])
+
+RESOLVER_DEPS = [
+    artifact("com.github.ajalt.clikt:clikt-jvm", "resolver_maven"),
+    artifact("com.jetbrains.intellij.platform:jps-model", "resolver_maven"),
+    artifact("org.jetbrains.amper:dependency-resolution", "resolver_maven"),
+    artifact("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm", "resolver_maven"),
+    artifact("org.jetbrains.kotlinx:kotlinx-serialization-core-jvm", "resolver_maven"),
+    artifact("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm", "resolver_maven"),
+]
+
+RESOLVER_TEST_DEPS = RESOLVER_DEPS + [
+    artifact("junit:junit", "resolver_maven"),
+]
+
+kt_compiler_plugin(
+    name = "serialization_plugin",
+    id = "org.jetbrains.kotlin.plugin.serialization",
+    deps = ["@rules_kotlin//kotlin/compiler:kotlin-serialization-compiler-plugin"],
+)
+
+kt_jvm_library(
+    name = "resolver_lib",
+    srcs = [
+        "src/org/jetbrains/kmp/commands/ResolveCommand.kt",
+        "src/org/jetbrains/kmp/main.kt",
+        "src/org/jetbrains/kmp/netrc.kt",
+        "src/org/jetbrains/kmp/support.kt",
+    ],
+    plugins = [":serialization_plugin"],
+    deps = RESOLVER_DEPS,
+)
+
+java_binary(
+    name = "resolver",
+    jvm_flags = ["--add-modules=java.net.http"],
+    main_class = "org.jetbrains.kmp.MainKt",
+    runtime_deps = [":resolver_lib"],
+)
+
+kt_jvm_test(
+    name = "resolver_test",
+    srcs = [
+        "test/org/jetbrains/kmp/main.kt",
+    ],
+    associates = [":resolver_lib"],
+    plugins = [":serialization_plugin"],
+    test_class = "org.jetbrains.kmp.ResolverTest",
+    deps = RESOLVER_TEST_DEPS,
+)
+
+kt_jvm_test(
+    name = "netrc_test",
+    srcs = [
+        "test/org/jetbrains/kmp/netrc.kt",
+    ],
+    associates = [":resolver_lib"],
+    plugins = [":serialization_plugin"],
+    test_class = "org.jetbrains.kmp.NetrcTest",
+    deps = RESOLVER_TEST_DEPS,
+)

@@ -40,7 +40,6 @@
     "https://bcr.bazel.build/modules/bazel_features/1.3.0/MODULE.bazel": "cdcafe83ec318cda34e02948e81d790aab8df7a929cec6f6969f13a489ccecd9",
     "https://bcr.bazel.build/modules/bazel_features/1.30.0/MODULE.bazel": "a14b62d05969a293b80257e72e597c2da7f717e1e69fa8b339703ed6731bec87",
     "https://bcr.bazel.build/modules/bazel_features/1.33.0/MODULE.bazel": "8b8dc9d2a4c88609409c3191165bccec0e4cb044cd7a72ccbe826583303459f6",
-    "https://bcr.bazel.build/modules/bazel_features/1.36.0/MODULE.bazel": "596cb62090b039caf1cad1d52a8bc35cf188ca9a4e279a828005e7ee49a1bec3",
     "https://bcr.bazel.build/modules/bazel_features/1.39.0/MODULE.bazel": "28739425c1fc283c91931619749c832b555e60bcd1010b40d8441ce0a5cf726d",
     "https://bcr.bazel.build/modules/bazel_features/1.4.1/MODULE.bazel": "e45b6bb2350aff3e442ae1111c555e27eac1d915e77775f6fdc4b351b758b5d7",
     "https://bcr.bazel.build/modules/bazel_features/1.42.1/MODULE.bazel": "275a59b5406ff18c01739860aa70ad7ccb3cfb474579411decca11c93b951080",
@@ -64,8 +63,6 @@
     "https://bcr.bazel.build/modules/bazel_skylib/1.8.1/MODULE.bazel": "88ade7293becda963e0e3ea33e7d54d3425127e0a326e0d17da085a5f1f03ff6",
     "https://bcr.bazel.build/modules/bazel_skylib/1.8.2/MODULE.bazel": "69ad6927098316848b34a9142bcc975e018ba27f08c4ff403f50c1b6e646ca67",
     "https://bcr.bazel.build/modules/bazel_skylib/1.8.2/source.json": "34a3c8bcf233b835eb74be9d628899bb32999d3e0eadef1947a0a562a2b16ffb",
-    "https://bcr.bazel.build/modules/bazel_skylib_gazelle_plugin/1.8.2/MODULE.bazel": "73af8b244b2bef2bfde9c4fb7fc3b2894024a977ef122b40227dc5ac951350bb",
-    "https://bcr.bazel.build/modules/bazel_skylib_gazelle_plugin/1.8.2/source.json": "4af00c66975b9ffe7e89bf4a23cbd9b27e29fd2decb712266a11b06605054e5a",
     "https://bcr.bazel.build/modules/bazel_worker_api/0.0.1/MODULE.bazel": "02a13b77321773b2042e70ee5e4c5e099c8ddee4cf2da9cd420442c36938d4bd",
     "https://bcr.bazel.build/modules/bazel_worker_api/0.0.4/MODULE.bazel": "460aa12d01231a80cce03c548287b433b321d205b0028ae596728c35e5ee442e",
     "https://bcr.bazel.build/modules/bazel_worker_api/0.0.8/MODULE.bazel": "396c1ef53835aafe3d42ce6619080531ee770648303731f16cfaa33fa056bf0c",
@@ -75,8 +72,6 @@
     "https://bcr.bazel.build/modules/bazel_worker_java/0.0.8/source.json": "9395c4679444bc47bf7e51a710366a4480aa371c6f6bed01868e2fabcf11acec",
     "https://bcr.bazel.build/modules/bazelrc-preset.bzl/1.6.0/MODULE.bazel": "11bc946a2e1a9c1bea066e44a704091b482e6049164b75b2381e8419bf055cf1",
     "https://bcr.bazel.build/modules/bazelrc-preset.bzl/1.6.0/source.json": "ad6cee6b42b5def78f6b3082c0bd7041a330003cbace330aaf1d3f94a122c48b",
-    "https://bcr.bazel.build/modules/buildifier_prebuilt/8.2.1/MODULE.bazel": "57f2736616367163651d9d3e918cddfd6c67ec7a541d924f2c4544d3fae8630e",
-    "https://bcr.bazel.build/modules/buildifier_prebuilt/8.2.1/source.json": "a3e79a347f9d8256d83eba2b621b5b6affa17c8b3236127f030db03b72a44a91",
     "https://bcr.bazel.build/modules/buildozer/8.5.1/MODULE.bazel": "a35d9561b3fc5b18797c330793e99e3b834a473d5fbd3d7d7634aafc9bdb6f8f",
     "https://bcr.bazel.build/modules/buildozer/8.5.1/source.json": "e3386e6ff4529f2442800dee47ad28d3e6487f36a1f75ae39ae56c70f0cd2fbd",
     "https://bcr.bazel.build/modules/gazelle/0.32.0/MODULE.bazel": "b499f58a5d0d3537f3cf5b76d8ada18242f64ec474d8391247438bf04f58c7b8",
@@ -84,7 +79,6 @@
     "https://bcr.bazel.build/modules/gazelle/0.34.0/MODULE.bazel": "abdd8ce4d70978933209db92e436deb3a8b737859e9354fb5fd11fb5c2004c8a",
     "https://bcr.bazel.build/modules/gazelle/0.36.0/MODULE.bazel": "e375d5d6e9a6ca59b0cb38b0540bc9a05b6aa926d322f2de268ad267a2ee74c0",
     "https://bcr.bazel.build/modules/gazelle/0.40.0/MODULE.bazel": "42ba5378ebe845fca43989a53186ab436d956db498acde790685fe0e8f9c6146",
-    "https://bcr.bazel.build/modules/gazelle/0.41.0/MODULE.bazel": "fdce8a8f5129d5b6d693d91cb191d0a014fdcb88e9094e528325a7165de2a826",
     "https://bcr.bazel.build/modules/gazelle/0.47.0/MODULE.bazel": "b61bb007c4efad134aa30ee7f4a8e2a39b22aa5685f005edaa022fbd1de43ebc",
     "https://bcr.bazel.build/modules/gazelle/0.47.0/source.json": "aeb2e5df14b7fb298625d75d08b9c65bdb0b56014c5eb89da9e5dd0572280ae6",
     "https://bcr.bazel.build/modules/google_benchmark/1.8.2/MODULE.bazel": "a70cf1bba851000ba93b58ae2f6d76490a9feb74192e57ab8e8ff13c34ec50cb",
@@ -124,7 +118,6 @@
     "https://bcr.bazel.build/modules/protobuf/29.0-rc2.bcr.1/MODULE.bazel": "52f4126f63a2f0bbf36b99c2a87648f08467a4eaf92ba726bc7d6a500bbf770c",
     "https://bcr.bazel.build/modules/protobuf/29.0-rc2/MODULE.bazel": "6241d35983510143049943fc0d57937937122baf1b287862f9dc8590fc4c37df",
     "https://bcr.bazel.build/modules/protobuf/29.0-rc3/MODULE.bazel": "33c2dfa286578573afc55a7acaea3cada4122b9631007c594bf0729f41c8de92",
-    "https://bcr.bazel.build/modules/protobuf/29.0/MODULE.bazel": "319dc8bf4c679ff87e71b1ccfb5a6e90a6dbc4693501d471f48662ac46d04e4e",
     "https://bcr.bazel.build/modules/protobuf/29.1/MODULE.bazel": "557c3457560ff49e122ed76c0bc3397a64af9574691cb8201b4e46d4ab2ecb95",
     "https://bcr.bazel.build/modules/protobuf/3.19.0/MODULE.bazel": "6b5fbb433f760a99a22b18b6850ed5784ef0e9928a72668b66e4d7ccd47db9b0",
     "https://bcr.bazel.build/modules/protobuf/3.19.2/MODULE.bazel": "532ffe5f2186b69fdde039efe6df13ba726ff338c6bc82275ad433013fa10573",
@@ -173,11 +166,9 @@
     "https://bcr.bazel.build/modules/rules_go/0.46.0/MODULE.bazel": "3477df8bdcc49e698b9d25f734c4f3a9f5931ff34ee48a2c662be168f5f2d3fd",
     "https://bcr.bazel.build/modules/rules_go/0.50.1/MODULE.bazel": "b91a308dc5782bb0a8021ad4330c81fea5bda77f96b9e4c117b9b9c8f6665ee0",
     "https://bcr.bazel.build/modules/rules_go/0.51.0-rc2/MODULE.bazel": "edfc3a9cea7bedb0eaaff37b0d7817c1a4bf72b3c615580b0ffcee6c52690fd4",
-    "https://bcr.bazel.build/modules/rules_go/0.52.0/MODULE.bazel": "0cf080a2706aa8fc9abf64286cee60fdf0238db37b7f1793b0f7d550d59ea3ae",
     "https://bcr.bazel.build/modules/rules_go/0.53.0/MODULE.bazel": "a4ed760d3ac0dbc0d7b967631a9a3fd9100d28f7d9fcf214b4df87d4bfff5f9a",
     "https://bcr.bazel.build/modules/rules_go/0.59.0/MODULE.bazel": "b7e43e7414a3139a7547d1b4909b29085fbe5182b6c58cbe1ed4c6272815aeae",
-    "https://bcr.bazel.build/modules/rules_go/0.60.0/MODULE.bazel": "4a57ff2ffc2a3570e3c5646575c5a4b07287e91bcdac5d1f72383d51502b48cb",
-    "https://bcr.bazel.build/modules/rules_go/0.60.0/source.json": "1e21368c5e0c3013a110bd79a8fcff8ca46b5bcb2b561713a7273cbfcff7c464",
+    "https://bcr.bazel.build/modules/rules_go/0.59.0/source.json": "1df17bb7865cfc029492c30163cee891d0dd8658ea0d5bfdf252c4b6db5c1ef6",
     "https://bcr.bazel.build/modules/rules_java/4.0.0/MODULE.bazel": "5a78a7ae82cd1a33cef56dc578c7d2a46ed0dca12643ee45edbb8417899e6f74",
     "https://bcr.bazel.build/modules/rules_java/5.3.5/MODULE.bazel": "a4ec4f2db570171e3e5eb753276ee4b389bae16b96207e9d3230895c99644b86",
     "https://bcr.bazel.build/modules/rules_java/6.3.0/MODULE.bazel": "a97c7678c19f236a956ad260d59c86e10a463badb7eb2eda787490f4c969b963",
@@ -274,12 +265,437 @@
   },
   "selectedYankedVersions": {},
   "moduleExtensions": {
-    "//kmp:extensions.bzl%resolver": {
+    "@@kmp+//kmp:extensions.bzl%kmp": {
+      "general": {
+        "bzlTransitiveDigest": "fBpjv0qPbCPDULdvjMLYWR1VBldzQL9ONpyGlKzoli8=",
+        "usagesDigest": "W/iyuDZwgOQ1ckRMT5s+JpjTKmrdda/02d4siBoVhRA=",
+        "recordedInputs": [
+          "REPO_MAPPING:kmp+,bazel_tools bazel_tools"
+        ],
+        "generatedRepoSpecs": {
+          "io_ktor-ktor-client-cio-wasm-js-3_4_3-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-client-cio-wasm-js-3.4.3-sources.jar",
+              "sha256": "f687961f7700ded3d2dee6f0c8e055883a7d36e4e25cc0346112b81da2f8d5e3",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-client-cio-wasm-js/3.4.3/ktor-client-cio-wasm-js-3.4.3-sources.jar"
+              ]
+            }
+          },
+          "io_ktor-ktor-client-cio-wasm-js-3_4_3_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-client-cio-wasm-js-3.4.3.klib",
+              "sha256": "bd4c1c3871822a7a44e0e34d73c648b9fa9b14ce66c1a19c9f2c3b193fb4d28d",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-client-cio-wasm-js/3.4.3/ktor-client-cio-wasm-js-3.4.3.klib"
+              ]
+            }
+          },
+          "io_ktor-ktor-client-core-wasm-js-3_4_3-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-client-core-wasm-js-3.4.3-sources.jar",
+              "sha256": "eb88bdc30196b0f382c7440a088b8bbf7a96a9a864e5a6b1a870cc149e63e2d4",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-client-core-wasm-js/3.4.3/ktor-client-core-wasm-js-3.4.3-sources.jar"
+              ]
+            }
+          },
+          "io_ktor-ktor-client-core-wasm-js-3_4_3_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-client-core-wasm-js-3.4.3.klib",
+              "sha256": "ac0edda20bc2fd755586898d32809896a02e11cb61e6ea56e983054d784d3c58",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-client-core-wasm-js/3.4.3/ktor-client-core-wasm-js-3.4.3.klib"
+              ]
+            }
+          },
+          "io_ktor-ktor-events-wasm-js-3_4_3-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-events-wasm-js-3.4.3-sources.jar",
+              "sha256": "25a4d89461d074f84b3f77d8bfe875832adfe744c83aee283f4586f37acdffc3",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-events-wasm-js/3.4.3/ktor-events-wasm-js-3.4.3-sources.jar"
+              ]
+            }
+          },
+          "io_ktor-ktor-events-wasm-js-3_4_3_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-events-wasm-js-3.4.3.klib",
+              "sha256": "c8eb7e46310384e23adb98851e2aac69df3f1825642e1a4ffefe02fc2140b8a8",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-events-wasm-js/3.4.3/ktor-events-wasm-js-3.4.3.klib"
+              ]
+            }
+          },
+          "io_ktor-ktor-http-cio-wasm-js-3_4_3-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-http-cio-wasm-js-3.4.3-sources.jar",
+              "sha256": "f33fa45fef541448bca822e00cf7f962289fe0905114b8886e7228e9af46a422",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-http-cio-wasm-js/3.4.3/ktor-http-cio-wasm-js-3.4.3-sources.jar"
+              ]
+            }
+          },
+          "io_ktor-ktor-http-cio-wasm-js-3_4_3_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-http-cio-wasm-js-3.4.3.klib",
+              "sha256": "a7d3c3ba88bc68bd66d63dd6497953a23495df12c9f565d7b75aac11f48b14b4",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-http-cio-wasm-js/3.4.3/ktor-http-cio-wasm-js-3.4.3.klib"
+              ]
+            }
+          },
+          "io_ktor-ktor-http-wasm-js-3_4_3-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-http-wasm-js-3.4.3-sources.jar",
+              "sha256": "89d0c95a6f1e2b066be03c6be2ee749f39144a540a8c315d1fa2dd2fec324ed9",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-http-wasm-js/3.4.3/ktor-http-wasm-js-3.4.3-sources.jar"
+              ]
+            }
+          },
+          "io_ktor-ktor-http-wasm-js-3_4_3_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-http-wasm-js-3.4.3.klib",
+              "sha256": "2b9bd365adaf09ba92d58e7eb6a268239829bf874571a4b4779fdafa4f27aad0",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-http-wasm-js/3.4.3/ktor-http-wasm-js-3.4.3.klib"
+              ]
+            }
+          },
+          "io_ktor-ktor-io-wasm-js-3_4_3-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-io-wasm-js-3.4.3-sources.jar",
+              "sha256": "ea8d6248ba8ba4d35830233e26b6d1962b0cc3a2321658138c06c737ee70d42a",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-io-wasm-js/3.4.3/ktor-io-wasm-js-3.4.3-sources.jar"
+              ]
+            }
+          },
+          "io_ktor-ktor-io-wasm-js-3_4_3_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-io-wasm-js-3.4.3.klib",
+              "sha256": "e4b5eb58ef81c57d1c8f7ca56743cf67c720170fb672e3e652f1120038d33b45",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-io-wasm-js/3.4.3/ktor-io-wasm-js-3.4.3.klib"
+              ]
+            }
+          },
+          "io_ktor-ktor-network-tls-wasm-js-3_4_3-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-network-tls-wasm-js-3.4.3-sources.jar",
+              "sha256": "f6943305a638f81fa1023d0150dd339afd3fe2841c72e3ba91b76f8c9d3280d2",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-network-tls-wasm-js/3.4.3/ktor-network-tls-wasm-js-3.4.3-sources.jar"
+              ]
+            }
+          },
+          "io_ktor-ktor-network-tls-wasm-js-3_4_3_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-network-tls-wasm-js-3.4.3.klib",
+              "sha256": "817af23a64d63b1b9d8eec275016bb1f6e6fd78a1fe24baf86daf83880c4ae24",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-network-tls-wasm-js/3.4.3/ktor-network-tls-wasm-js-3.4.3.klib"
+              ]
+            }
+          },
+          "io_ktor-ktor-network-wasm-js-3_4_3-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-network-wasm-js-3.4.3-sources.jar",
+              "sha256": "a3dff14161f82268c898df6bfbf57ed1b4aa5f049ab3c16015b9f859ec11820f",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-network-wasm-js/3.4.3/ktor-network-wasm-js-3.4.3-sources.jar"
+              ]
+            }
+          },
+          "io_ktor-ktor-network-wasm-js-3_4_3_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-network-wasm-js-3.4.3.klib",
+              "sha256": "3d725d6f087730ffc43d1ea158bec770ac4a319b60522e7fba0a700ba46bd965",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-network-wasm-js/3.4.3/ktor-network-wasm-js-3.4.3.klib"
+              ]
+            }
+          },
+          "io_ktor-ktor-serialization-wasm-js-3_4_3-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-serialization-wasm-js-3.4.3-sources.jar",
+              "sha256": "ddc84dd1f279b1c7cd2e476a2b214c1960577116e7abe15c469f8b37fbb46483",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-serialization-wasm-js/3.4.3/ktor-serialization-wasm-js-3.4.3-sources.jar"
+              ]
+            }
+          },
+          "io_ktor-ktor-serialization-wasm-js-3_4_3_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-serialization-wasm-js-3.4.3.klib",
+              "sha256": "8f1ac8dd173aa32937f31c4c509fd13fe029f7051457cda7dda5416a06d5d0f3",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-serialization-wasm-js/3.4.3/ktor-serialization-wasm-js-3.4.3.klib"
+              ]
+            }
+          },
+          "io_ktor-ktor-sse-wasm-js-3_4_3-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-sse-wasm-js-3.4.3-sources.jar",
+              "sha256": "01efe32298e72359115ab1ae29d6f2859a1c5dd05f26b93d7e295c175e2c0ca6",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-sse-wasm-js/3.4.3/ktor-sse-wasm-js-3.4.3-sources.jar"
+              ]
+            }
+          },
+          "io_ktor-ktor-sse-wasm-js-3_4_3_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-sse-wasm-js-3.4.3.klib",
+              "sha256": "1130ce4112dbfd9eeca7db2806000327297c0942e6df6310369fa26a06357307",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-sse-wasm-js/3.4.3/ktor-sse-wasm-js-3.4.3.klib"
+              ]
+            }
+          },
+          "io_ktor-ktor-utils-wasm-js-3_4_3-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-utils-wasm-js-3.4.3-sources.jar",
+              "sha256": "46e8a7df802a32ba97f142a80ce8a353b9dff73c4c411b60b27814bf28b29fdb",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-utils-wasm-js/3.4.3/ktor-utils-wasm-js-3.4.3-sources.jar"
+              ]
+            }
+          },
+          "io_ktor-ktor-utils-wasm-js-3_4_3_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-utils-wasm-js-3.4.3.klib",
+              "sha256": "90b38b8706aa9fcb47ddf0297e1ece780427c61565c33749e2633f6d11aaee46",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-utils-wasm-js/3.4.3/ktor-utils-wasm-js-3.4.3.klib"
+              ]
+            }
+          },
+          "io_ktor-ktor-websocket-serialization-wasm-js-3_4_3-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-websocket-serialization-wasm-js-3.4.3-sources.jar",
+              "sha256": "e186e6ac4d88ce296ef51d91684444ca0002b4b7761a8dcd2fe55ef1dc8a7b75",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-websocket-serialization-wasm-js/3.4.3/ktor-websocket-serialization-wasm-js-3.4.3-sources.jar"
+              ]
+            }
+          },
+          "io_ktor-ktor-websocket-serialization-wasm-js-3_4_3_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-websocket-serialization-wasm-js-3.4.3.klib",
+              "sha256": "2e3bcfff995421a2601540c6297768760267f034346c295048a9eaf9a474a205",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-websocket-serialization-wasm-js/3.4.3/ktor-websocket-serialization-wasm-js-3.4.3.klib"
+              ]
+            }
+          },
+          "io_ktor-ktor-websockets-wasm-js-3_4_3-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-websockets-wasm-js-3.4.3-sources.jar",
+              "sha256": "cfb36e61527b431b8dbfe8bc20162802818457053388132c911a54007abdb8b1",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-websockets-wasm-js/3.4.3/ktor-websockets-wasm-js-3.4.3-sources.jar"
+              ]
+            }
+          },
+          "io_ktor-ktor-websockets-wasm-js-3_4_3_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "ktor-websockets-wasm-js-3.4.3.klib",
+              "sha256": "b8a6ab9f60070ba600963c0f854386991e0edb276c2e9e2a20b93e4370fff03a",
+              "urls": [
+                "https://repo1.maven.org/maven2/io/ktor/ktor-websockets-wasm-js/3.4.3/ktor-websockets-wasm-js-3.4.3.klib"
+              ]
+            }
+          },
+          "org_jetbrains_kotlinx-atomicfu-wasm-js-0_32_1-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "atomicfu-wasm-js-0.32.1-sources.jar",
+              "sha256": "ee5ce15d83c60aa529c52369df32bfdf96cb591a0ed0c5068760a59eb89aa6f6",
+              "urls": [
+                "https://repo1.maven.org/maven2/org/jetbrains/kotlinx/atomicfu-wasm-js/0.32.1/atomicfu-wasm-js-0.32.1-sources.jar"
+              ]
+            }
+          },
+          "org_jetbrains_kotlinx-atomicfu-wasm-js-0_32_1_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "atomicfu-wasm-js-0.32.1.klib",
+              "sha256": "1bdc5a5216944b8f9a396d2f0c7df320b43d6921725baad1afc04cc8e2ae48e3",
+              "urls": [
+                "https://repo1.maven.org/maven2/org/jetbrains/kotlinx/atomicfu-wasm-js/0.32.1/atomicfu-wasm-js-0.32.1.klib"
+              ]
+            }
+          },
+          "org_jetbrains_kotlinx-kotlinx-browser-wasm-js-0_5_0-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "kotlinx-browser-wasm-js-0.5.0-sources.jar",
+              "sha256": "5c87feada4654e72ca24512329e6dc495b6e016212c56f52a5f99b40d3e069cd",
+              "urls": [
+                "https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-browser-wasm-js/0.5.0/kotlinx-browser-wasm-js-0.5.0-sources.jar"
+              ]
+            }
+          },
+          "org_jetbrains_kotlinx-kotlinx-browser-wasm-js-0_5_0_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "kotlinx-browser-wasm-js-0.5.0.klib",
+              "sha256": "00d542206fff41458574ab7341e80f13629743af68621dd5d3750cd836ca70e5",
+              "urls": [
+                "https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-browser-wasm-js/0.5.0/kotlinx-browser-wasm-js-0.5.0.klib"
+              ]
+            }
+          },
+          "org_jetbrains_kotlinx-kotlinx-coroutines-core-wasm-js-1_10_2-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "kotlinx-coroutines-core-wasm-js-1.10.2-sources.jar",
+              "sha256": "0e4a1eb9cd2c6c04bd1d49945b7c87bd9a1942a988736e7cfbc66cd8bc07c5b8",
+              "urls": [
+                "https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-wasm-js/1.10.2/kotlinx-coroutines-core-wasm-js-1.10.2-sources.jar"
+              ]
+            }
+          },
+          "org_jetbrains_kotlinx-kotlinx-coroutines-core-wasm-js-1_10_2_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "kotlinx-coroutines-core-wasm-js-1.10.2.klib",
+              "sha256": "bcc6bdd07b3fe05299e35b368a826f23db019899b6f75b15812bd01aab2d166f",
+              "urls": [
+                "https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-wasm-js/1.10.2/kotlinx-coroutines-core-wasm-js-1.10.2.klib"
+              ]
+            }
+          },
+          "org_jetbrains_kotlinx-kotlinx-io-bytestring-wasm-js-0_8_2-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "kotlinx-io-bytestring-wasm-js-0.8.2-sources.jar",
+              "sha256": "1f8ee8ea529e72ea14d2482952a099c874c65c58a2eb4efd21464870400c45e8",
+              "urls": [
+                "https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-io-bytestring-wasm-js/0.8.2/kotlinx-io-bytestring-wasm-js-0.8.2-sources.jar"
+              ]
+            }
+          },
+          "org_jetbrains_kotlinx-kotlinx-io-bytestring-wasm-js-0_8_2_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "kotlinx-io-bytestring-wasm-js-0.8.2.klib",
+              "sha256": "6396c750b13f51fa44133d854ba56c0282aa4a7f44f735f6c0c5ee4191f3462e",
+              "urls": [
+                "https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-io-bytestring-wasm-js/0.8.2/kotlinx-io-bytestring-wasm-js-0.8.2.klib"
+              ]
+            }
+          },
+          "org_jetbrains_kotlinx-kotlinx-io-core-wasm-js-0_8_2-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "kotlinx-io-core-wasm-js-0.8.2-sources.jar",
+              "sha256": "7d6dd4ad771e0ded2b4f0403fcff65afb13cb5186f7a672b0238cff736006d94",
+              "urls": [
+                "https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-io-core-wasm-js/0.8.2/kotlinx-io-core-wasm-js-0.8.2-sources.jar"
+              ]
+            }
+          },
+          "org_jetbrains_kotlinx-kotlinx-io-core-wasm-js-0_8_2_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "kotlinx-io-core-wasm-js-0.8.2.klib",
+              "sha256": "b3f21976b6b375486e2988dd5c24af7c24f2e5c5a1e035cfcfc9aa17cf921051",
+              "urls": [
+                "https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-io-core-wasm-js/0.8.2/kotlinx-io-core-wasm-js-0.8.2.klib"
+              ]
+            }
+          },
+          "org_jetbrains_kotlinx-kotlinx-serialization-core-wasm-js-1_9_0-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "kotlinx-serialization-core-wasm-js-1.9.0-sources.jar",
+              "sha256": "2895182b390cf03492e487ccd683364ec62777f7461a6b27d055e8722ea59a98",
+              "urls": [
+                "https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-serialization-core-wasm-js/1.9.0/kotlinx-serialization-core-wasm-js-1.9.0-sources.jar"
+              ]
+            }
+          },
+          "org_jetbrains_kotlinx-kotlinx-serialization-core-wasm-js-1_9_0_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "kotlinx-serialization-core-wasm-js-1.9.0.klib",
+              "sha256": "12d94bad5eeac92020cee9b32f0dfb119104c92dcd6d9f41fe707d053cbfc25c",
+              "urls": [
+                "https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-serialization-core-wasm-js/1.9.0/kotlinx-serialization-core-wasm-js-1.9.0.klib"
+              ]
+            }
+          },
+          "org_jetbrains_kotlin-kotlin-stdlib-wasm-js-2_3_0-sources_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "kotlin-stdlib-wasm-js-2.3.0-sources.jar",
+              "sha256": "2c950c1886874b8077e4f32d659a76e30d277760f5faac8621ddaed5e5d800f0",
+              "urls": [
+                "https://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-wasm-js/2.3.0/kotlin-stdlib-wasm-js-2.3.0-sources.jar"
+              ]
+            }
+          },
+          "org_jetbrains_kotlin-kotlin-stdlib-wasm-js-2_3_0_http": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_file",
+            "attributes": {
+              "downloaded_file_path": "kotlin-stdlib-wasm-js-2.3.0.klib",
+              "sha256": "e267fe680014437a169c00d12020859abd321207b58ff12e884515341eac9833",
+              "urls": [
+                "https://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-wasm-js/2.3.0/kotlin-stdlib-wasm-js-2.3.0.klib"
+              ]
+            }
+          },
+          "kmp_deps": {
+            "repoRuleId": "@@kmp+//kmp/private/extensions:kmp.bzl%_kmp_deps_repository",
+            "attributes": {
+              "build_file_content": "load(\"@kmp//kmp:wasmjs.bzl\", \"kmp_wasmjs_import\")\n\npackage(default_visibility = [\"//visibility:public\"])\n\n# io.ktor:ktor-client-cio-wasm-js:3.4.3\nkmp_wasmjs_import(\n    name = \"io_ktor_ktor_client_cio_wasm_js_3_4_3\",\n    compile_klibs = [\n        \"@io_ktor-ktor-client-cio-wasm-js-3_4_3_http//file\",\n    ],\n    link_klibs = [\n        \"@io_ktor-ktor-client-cio-wasm-js-3_4_3_http//file\",\n    ],\n    source_jars = [\n        \"@io_ktor-ktor-client-cio-wasm-js-3_4_3-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlinx_atomicfu_wasm_js_0_32_1\",\n        \":org_jetbrains_kotlinx_kotlinx_coroutines_core_wasm_js_1_10_2\",\n        \":io_ktor_ktor_client_core_wasm_js_3_4_3\",\n        \":io_ktor_ktor_http_cio_wasm_js_3_4_3\",\n        \":io_ktor_ktor_websockets_wasm_js_3_4_3\",\n        \":io_ktor_ktor_network_tls_wasm_js_3_4_3\",\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n        \":org_jetbrains_kotlinx_kotlinx_browser_wasm_js_0_5_0\",\n    ],\n)\n\n# io.ktor:ktor-client-core-wasm-js:3.4.3\nkmp_wasmjs_import(\n    name = \"io_ktor_ktor_client_core_wasm_js_3_4_3\",\n    compile_klibs = [\n        \"@io_ktor-ktor-client-core-wasm-js-3_4_3_http//file\",\n    ],\n    link_klibs = [\n        \"@io_ktor-ktor-client-core-wasm-js-3_4_3_http//file\",\n    ],\n    source_jars = [\n        \"@io_ktor-ktor-client-core-wasm-js-3_4_3-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlinx_atomicfu_wasm_js_0_32_1\",\n        \":org_jetbrains_kotlinx_kotlinx_coroutines_core_wasm_js_1_10_2\",\n        \":io_ktor_ktor_http_wasm_js_3_4_3\",\n        \":io_ktor_ktor_http_cio_wasm_js_3_4_3\",\n        \":io_ktor_ktor_events_wasm_js_3_4_3\",\n        \":io_ktor_ktor_websocket_serialization_wasm_js_3_4_3\",\n        \":io_ktor_ktor_sse_wasm_js_3_4_3\",\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n        \":org_jetbrains_kotlinx_kotlinx_browser_wasm_js_0_5_0\",\n    ],\n)\n\n# io.ktor:ktor-events-wasm-js:3.4.3\nkmp_wasmjs_import(\n    name = \"io_ktor_ktor_events_wasm_js_3_4_3\",\n    compile_klibs = [\n        \"@io_ktor-ktor-events-wasm-js-3_4_3_http//file\",\n    ],\n    link_klibs = [\n        \"@io_ktor-ktor-events-wasm-js-3_4_3_http//file\",\n    ],\n    source_jars = [\n        \"@io_ktor-ktor-events-wasm-js-3_4_3-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlinx_atomicfu_wasm_js_0_32_1\",\n        \":org_jetbrains_kotlinx_kotlinx_coroutines_core_wasm_js_1_10_2\",\n        \":io_ktor_ktor_utils_wasm_js_3_4_3\",\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n        \":org_jetbrains_kotlinx_kotlinx_browser_wasm_js_0_5_0\",\n    ],\n)\n\n# io.ktor:ktor-http-cio-wasm-js:3.4.3\nkmp_wasmjs_import(\n    name = \"io_ktor_ktor_http_cio_wasm_js_3_4_3\",\n    compile_klibs = [\n        \"@io_ktor-ktor-http-cio-wasm-js-3_4_3_http//file\",\n    ],\n    link_klibs = [\n        \"@io_ktor-ktor-http-cio-wasm-js-3_4_3_http//file\",\n    ],\n    source_jars = [\n        \"@io_ktor-ktor-http-cio-wasm-js-3_4_3-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlinx_atomicfu_wasm_js_0_32_1\",\n        \":org_jetbrains_kotlinx_kotlinx_coroutines_core_wasm_js_1_10_2\",\n        \":io_ktor_ktor_http_wasm_js_3_4_3\",\n        \":io_ktor_ktor_io_wasm_js_3_4_3\",\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n        \":org_jetbrains_kotlinx_kotlinx_browser_wasm_js_0_5_0\",\n    ],\n)\n\n# io.ktor:ktor-http-wasm-js:3.4.3\nkmp_wasmjs_import(\n    name = \"io_ktor_ktor_http_wasm_js_3_4_3\",\n    compile_klibs = [\n        \"@io_ktor-ktor-http-wasm-js-3_4_3_http//file\",\n    ],\n    link_klibs = [\n        \"@io_ktor-ktor-http-wasm-js-3_4_3_http//file\",\n    ],\n    source_jars = [\n        \"@io_ktor-ktor-http-wasm-js-3_4_3-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlinx_atomicfu_wasm_js_0_32_1\",\n        \":org_jetbrains_kotlinx_kotlinx_coroutines_core_wasm_js_1_10_2\",\n        \":io_ktor_ktor_utils_wasm_js_3_4_3\",\n        \":org_jetbrains_kotlinx_kotlinx_serialization_core_wasm_js_1_9_0\",\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n        \":org_jetbrains_kotlinx_kotlinx_browser_wasm_js_0_5_0\",\n    ],\n)\n\n# io.ktor:ktor-io-wasm-js:3.4.3\nkmp_wasmjs_import(\n    name = \"io_ktor_ktor_io_wasm_js_3_4_3\",\n    compile_klibs = [\n        \"@io_ktor-ktor-io-wasm-js-3_4_3_http//file\",\n    ],\n    link_klibs = [\n        \"@io_ktor-ktor-io-wasm-js-3_4_3_http//file\",\n    ],\n    source_jars = [\n        \"@io_ktor-ktor-io-wasm-js-3_4_3-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlinx_atomicfu_wasm_js_0_32_1\",\n        \":org_jetbrains_kotlinx_kotlinx_coroutines_core_wasm_js_1_10_2\",\n        \":org_jetbrains_kotlinx_kotlinx_io_core_wasm_js_0_8_2\",\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n        \":org_jetbrains_kotlinx_kotlinx_browser_wasm_js_0_5_0\",\n    ],\n)\n\n# io.ktor:ktor-network-tls-wasm-js:3.4.3\nkmp_wasmjs_import(\n    name = \"io_ktor_ktor_network_tls_wasm_js_3_4_3\",\n    compile_klibs = [\n        \"@io_ktor-ktor-network-tls-wasm-js-3_4_3_http//file\",\n    ],\n    link_klibs = [\n        \"@io_ktor-ktor-network-tls-wasm-js-3_4_3_http//file\",\n    ],\n    source_jars = [\n        \"@io_ktor-ktor-network-tls-wasm-js-3_4_3-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlinx_atomicfu_wasm_js_0_32_1\",\n        \":org_jetbrains_kotlinx_kotlinx_coroutines_core_wasm_js_1_10_2\",\n        \":io_ktor_ktor_http_wasm_js_3_4_3\",\n        \":io_ktor_ktor_network_wasm_js_3_4_3\",\n        \":io_ktor_ktor_utils_wasm_js_3_4_3\",\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n        \":org_jetbrains_kotlinx_kotlinx_browser_wasm_js_0_5_0\",\n    ],\n)\n\n# io.ktor:ktor-network-wasm-js:3.4.3\nkmp_wasmjs_import(\n    name = \"io_ktor_ktor_network_wasm_js_3_4_3\",\n    compile_klibs = [\n        \"@io_ktor-ktor-network-wasm-js-3_4_3_http//file\",\n    ],\n    link_klibs = [\n        \"@io_ktor-ktor-network-wasm-js-3_4_3_http//file\",\n    ],\n    source_jars = [\n        \"@io_ktor-ktor-network-wasm-js-3_4_3-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlinx_atomicfu_wasm_js_0_32_1\",\n        \":org_jetbrains_kotlinx_kotlinx_coroutines_core_wasm_js_1_10_2\",\n        \":io_ktor_ktor_utils_wasm_js_3_4_3\",\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n        \":org_jetbrains_kotlinx_kotlinx_browser_wasm_js_0_5_0\",\n    ],\n)\n\n# io.ktor:ktor-serialization-wasm-js:3.4.3\nkmp_wasmjs_import(\n    name = \"io_ktor_ktor_serialization_wasm_js_3_4_3\",\n    compile_klibs = [\n        \"@io_ktor-ktor-serialization-wasm-js-3_4_3_http//file\",\n    ],\n    link_klibs = [\n        \"@io_ktor-ktor-serialization-wasm-js-3_4_3_http//file\",\n    ],\n    source_jars = [\n        \"@io_ktor-ktor-serialization-wasm-js-3_4_3-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlinx_atomicfu_wasm_js_0_32_1\",\n        \":org_jetbrains_kotlinx_kotlinx_coroutines_core_wasm_js_1_10_2\",\n        \":io_ktor_ktor_websockets_wasm_js_3_4_3\",\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n        \":org_jetbrains_kotlinx_kotlinx_browser_wasm_js_0_5_0\",\n    ],\n)\n\n# io.ktor:ktor-sse-wasm-js:3.4.3\nkmp_wasmjs_import(\n    name = \"io_ktor_ktor_sse_wasm_js_3_4_3\",\n    compile_klibs = [\n        \"@io_ktor-ktor-sse-wasm-js-3_4_3_http//file\",\n    ],\n    link_klibs = [\n        \"@io_ktor-ktor-sse-wasm-js-3_4_3_http//file\",\n    ],\n    source_jars = [\n        \"@io_ktor-ktor-sse-wasm-js-3_4_3-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlinx_atomicfu_wasm_js_0_32_1\",\n        \":org_jetbrains_kotlinx_kotlinx_coroutines_core_wasm_js_1_10_2\",\n        \":io_ktor_ktor_utils_wasm_js_3_4_3\",\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n        \":org_jetbrains_kotlinx_kotlinx_browser_wasm_js_0_5_0\",\n    ],\n)\n\n# io.ktor:ktor-utils-wasm-js:3.4.3\nkmp_wasmjs_import(\n    name = \"io_ktor_ktor_utils_wasm_js_3_4_3\",\n    compile_klibs = [\n        \"@io_ktor-ktor-utils-wasm-js-3_4_3_http//file\",\n    ],\n    link_klibs = [\n        \"@io_ktor-ktor-utils-wasm-js-3_4_3_http//file\",\n    ],\n    source_jars = [\n        \"@io_ktor-ktor-utils-wasm-js-3_4_3-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlinx_atomicfu_wasm_js_0_32_1\",\n        \":org_jetbrains_kotlinx_kotlinx_coroutines_core_wasm_js_1_10_2\",\n        \":io_ktor_ktor_io_wasm_js_3_4_3\",\n        \":org_jetbrains_kotlinx_kotlinx_serialization_core_wasm_js_1_9_0\",\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n        \":org_jetbrains_kotlinx_kotlinx_browser_wasm_js_0_5_0\",\n    ],\n)\n\n# io.ktor:ktor-websocket-serialization-wasm-js:3.4.3\nkmp_wasmjs_import(\n    name = \"io_ktor_ktor_websocket_serialization_wasm_js_3_4_3\",\n    compile_klibs = [\n        \"@io_ktor-ktor-websocket-serialization-wasm-js-3_4_3_http//file\",\n    ],\n    link_klibs = [\n        \"@io_ktor-ktor-websocket-serialization-wasm-js-3_4_3_http//file\",\n    ],\n    source_jars = [\n        \"@io_ktor-ktor-websocket-serialization-wasm-js-3_4_3-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlinx_atomicfu_wasm_js_0_32_1\",\n        \":org_jetbrains_kotlinx_kotlinx_coroutines_core_wasm_js_1_10_2\",\n        \":io_ktor_ktor_serialization_wasm_js_3_4_3\",\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n        \":org_jetbrains_kotlinx_kotlinx_browser_wasm_js_0_5_0\",\n    ],\n)\n\n# io.ktor:ktor-websockets-wasm-js:3.4.3\nkmp_wasmjs_import(\n    name = \"io_ktor_ktor_websockets_wasm_js_3_4_3\",\n    compile_klibs = [\n        \"@io_ktor-ktor-websockets-wasm-js-3_4_3_http//file\",\n    ],\n    link_klibs = [\n        \"@io_ktor-ktor-websockets-wasm-js-3_4_3_http//file\",\n    ],\n    source_jars = [\n        \"@io_ktor-ktor-websockets-wasm-js-3_4_3-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlinx_atomicfu_wasm_js_0_32_1\",\n        \":org_jetbrains_kotlinx_kotlinx_coroutines_core_wasm_js_1_10_2\",\n        \":io_ktor_ktor_utils_wasm_js_3_4_3\",\n        \":io_ktor_ktor_http_wasm_js_3_4_3\",\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n        \":org_jetbrains_kotlinx_kotlinx_browser_wasm_js_0_5_0\",\n    ],\n)\n\n# org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\nkmp_wasmjs_import(\n    name = \"org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n    compile_klibs = [\n        \"@org_jetbrains_kotlin-kotlin-stdlib-wasm-js-2_3_0_http//file\",\n    ],\n    link_klibs = [\n        \"@org_jetbrains_kotlin-kotlin-stdlib-wasm-js-2_3_0_http//file\",\n    ],\n    source_jars = [\n        \"@org_jetbrains_kotlin-kotlin-stdlib-wasm-js-2_3_0-sources_http//file\",\n    ],\n)\n\n# org.jetbrains.kotlinx:atomicfu-wasm-js:0.26.1\nkmp_wasmjs_import(\n    name = \"org_jetbrains_kotlinx_atomicfu_wasm_js_0_26_1\",\n    compile_klibs = [\n        \"@org_jetbrains_kotlinx-atomicfu-wasm-js-0_32_1_http//file\",\n    ],\n    link_klibs = [\n        \"@org_jetbrains_kotlinx-atomicfu-wasm-js-0_32_1_http//file\",\n    ],\n    source_jars = [\n        \"@org_jetbrains_kotlinx-atomicfu-wasm-js-0_32_1-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n    ],\n)\n\n# org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\nkmp_wasmjs_import(\n    name = \"org_jetbrains_kotlinx_atomicfu_wasm_js_0_32_1\",\n    compile_klibs = [\n        \"@org_jetbrains_kotlinx-atomicfu-wasm-js-0_32_1_http//file\",\n    ],\n    link_klibs = [\n        \"@org_jetbrains_kotlinx-atomicfu-wasm-js-0_32_1_http//file\",\n    ],\n    source_jars = [\n        \"@org_jetbrains_kotlinx-atomicfu-wasm-js-0_32_1-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n    ],\n)\n\n# org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\nkmp_wasmjs_import(\n    name = \"org_jetbrains_kotlinx_kotlinx_browser_wasm_js_0_5_0\",\n    compile_klibs = [\n        \"@org_jetbrains_kotlinx-kotlinx-browser-wasm-js-0_5_0_http//file\",\n    ],\n    link_klibs = [\n        \"@org_jetbrains_kotlinx-kotlinx-browser-wasm-js-0_5_0_http//file\",\n    ],\n    source_jars = [\n        \"@org_jetbrains_kotlinx-kotlinx-browser-wasm-js-0_5_0-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n    ],\n)\n\n# org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\nkmp_wasmjs_import(\n    name = \"org_jetbrains_kotlinx_kotlinx_coroutines_core_wasm_js_1_10_2\",\n    compile_klibs = [\n        \"@org_jetbrains_kotlinx-kotlinx-coroutines-core-wasm-js-1_10_2_http//file\",\n    ],\n    link_klibs = [\n        \"@org_jetbrains_kotlinx-kotlinx-coroutines-core-wasm-js-1_10_2_http//file\",\n    ],\n    source_jars = [\n        \"@org_jetbrains_kotlinx-kotlinx-coroutines-core-wasm-js-1_10_2-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlinx_atomicfu_wasm_js_0_26_1\",\n        \":org_jetbrains_kotlinx_atomicfu_wasm_js_0_32_1\",\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n    ],\n)\n\n# org.jetbrains.kotlinx:kotlinx-io-bytestring-wasm-js:0.8.2\nkmp_wasmjs_import(\n    name = \"org_jetbrains_kotlinx_kotlinx_io_bytestring_wasm_js_0_8_2\",\n    compile_klibs = [\n        \"@org_jetbrains_kotlinx-kotlinx-io-bytestring-wasm-js-0_8_2_http//file\",\n    ],\n    link_klibs = [\n        \"@org_jetbrains_kotlinx-kotlinx-io-bytestring-wasm-js-0_8_2_http//file\",\n    ],\n    source_jars = [\n        \"@org_jetbrains_kotlinx-kotlinx-io-bytestring-wasm-js-0_8_2-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n    ],\n)\n\n# org.jetbrains.kotlinx:kotlinx-io-core-wasm-js:0.8.2\nkmp_wasmjs_import(\n    name = \"org_jetbrains_kotlinx_kotlinx_io_core_wasm_js_0_8_2\",\n    compile_klibs = [\n        \"@org_jetbrains_kotlinx-kotlinx-io-core-wasm-js-0_8_2_http//file\",\n    ],\n    link_klibs = [\n        \"@org_jetbrains_kotlinx-kotlinx-io-core-wasm-js-0_8_2_http//file\",\n    ],\n    source_jars = [\n        \"@org_jetbrains_kotlinx-kotlinx-io-core-wasm-js-0_8_2-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlinx_kotlinx_io_bytestring_wasm_js_0_8_2\",\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n    ],\n)\n\n# org.jetbrains.kotlinx:kotlinx-serialization-core-wasm-js:1.9.0\nkmp_wasmjs_import(\n    name = \"org_jetbrains_kotlinx_kotlinx_serialization_core_wasm_js_1_9_0\",\n    compile_klibs = [\n        \"@org_jetbrains_kotlinx-kotlinx-serialization-core-wasm-js-1_9_0_http//file\",\n    ],\n    link_klibs = [\n        \"@org_jetbrains_kotlinx-kotlinx-serialization-core-wasm-js-1_9_0_http//file\",\n    ],\n    source_jars = [\n        \"@org_jetbrains_kotlinx-kotlinx-serialization-core-wasm-js-1_9_0-sources_http//file\",\n    ],\n    deps = [\n        \":org_jetbrains_kotlin_kotlin_stdlib_wasm_js_2_3_0\",\n    ],\n)\n"
+            }
+          }
+        },
+        "moduleExtensionMetadata": {
+          "explicitRootModuleDirectDeps": [
+            "kmp_deps"
+          ],
+          "explicitRootModuleDirectDevDeps": [],
+          "useAllRepos": "NO",
+          "reproducible": false
+        }
+      }
+    },
+    "@@kmp+//kmp:extensions.bzl%resolver": {
       "general": {
         "bzlTransitiveDigest": "b5CqxO7EjSQVlG3Hz+sezE/fwf/6kte/ta6w8wZNqcw=",
-        "usagesDigest": "6VwiUzC0Ke83aTjIVwanClmwsduQZIjhHNxxDwrw1no=",
+        "usagesDigest": "OpgEd7GBNeSbe6OydGG9AjRAcEYVEqp8jYgI+S0p4no=",
         "recordedInputs": [
-          "REPO_MAPPING:,bazel_tools bazel_tools"
+          "REPO_MAPPING:kmp+,bazel_tools bazel_tools"
         ],
         "generatedRepoSpecs": {
           "kmp_resolver": {
@@ -565,6 +981,9 @@
     }
   },
   "facts": {
+    "@@kmp+//kmp:extensions.bzl%kmp": {
+      "resolution.v15|deps=29:io.ktor:ktor-client-cio:3.4.3,30:io.ktor:ktor-client-core:3.4.3|repositories=30:https://repo1.maven.org/maven2": "{\"askedCoordinates\":[\"io.ktor:ktor-client-cio:3.4.3\",\"io.ktor:ktor-client-core:3.4.3\"],\"askedRepositories\":[\"https://repo1.maven.org/maven2\"],\"libraries\":{\"io.ktor:ktor-client-cio-wasm-js:3.4.3\":{\"id\":\"io.ktor:ktor-client-cio-wasm-js:3.4.3\",\"klibs\":[{\"sha256checksum\":\"bd4c1c3871822a7a44e0e34d73c648b9fa9b14ce66c1a19c9f2c3b193fb4d28d\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-client-cio-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-client-cio-wasm-js/3.4.3/ktor-client-cio-wasm-js-3.4.3.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"f687961f7700ded3d2dee6f0c8e055883a7d36e4e25cc0346112b81da2f8d5e3\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-client-cio-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-client-cio-wasm-js/3.4.3/ktor-client-cio-wasm-js-3.4.3-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\",\"org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\",\"io.ktor:ktor-client-core-wasm-js:3.4.3\",\"io.ktor:ktor-http-cio-wasm-js:3.4.3\",\"io.ktor:ktor-websockets-wasm-js:3.4.3\",\"io.ktor:ktor-network-tls-wasm-js:3.4.3\",\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\",\"org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\":{\"id\":\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\",\"klibs\":[{\"sha256checksum\":\"1bdc5a5216944b8f9a396d2f0c7df320b43d6921725baad1afc04cc8e2ae48e3\",\"groupId\":\"org.jetbrains.kotlinx\",\"artifactId\":\"atomicfu-wasm-js\",\"version\":\"0.32.1\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlinx/atomicfu-wasm-js/0.32.1/atomicfu-wasm-js-0.32.1.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"ee5ce15d83c60aa529c52369df32bfdf96cb591a0ed0c5068760a59eb89aa6f6\",\"groupId\":\"org.jetbrains.kotlinx\",\"artifactId\":\"atomicfu-wasm-js\",\"version\":\"0.32.1\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlinx/atomicfu-wasm-js/0.32.1/atomicfu-wasm-js-0.32.1-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\":{\"id\":\"org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\",\"klibs\":[{\"sha256checksum\":\"bcc6bdd07b3fe05299e35b368a826f23db019899b6f75b15812bd01aab2d166f\",\"groupId\":\"org.jetbrains.kotlinx\",\"artifactId\":\"kotlinx-coroutines-core-wasm-js\",\"version\":\"1.10.2\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-wasm-js/1.10.2/kotlinx-coroutines-core-wasm-js-1.10.2.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"0e4a1eb9cd2c6c04bd1d49945b7c87bd9a1942a988736e7cfbc66cd8bc07c5b8\",\"groupId\":\"org.jetbrains.kotlinx\",\"artifactId\":\"kotlinx-coroutines-core-wasm-js\",\"version\":\"1.10.2\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-wasm-js/1.10.2/kotlinx-coroutines-core-wasm-js-1.10.2-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.26.1\",\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\",\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"io.ktor:ktor-client-core-wasm-js:3.4.3\":{\"id\":\"io.ktor:ktor-client-core-wasm-js:3.4.3\",\"klibs\":[{\"sha256checksum\":\"ac0edda20bc2fd755586898d32809896a02e11cb61e6ea56e983054d784d3c58\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-client-core-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-client-core-wasm-js/3.4.3/ktor-client-core-wasm-js-3.4.3.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"eb88bdc30196b0f382c7440a088b8bbf7a96a9a864e5a6b1a870cc149e63e2d4\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-client-core-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-client-core-wasm-js/3.4.3/ktor-client-core-wasm-js-3.4.3-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\",\"org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\",\"io.ktor:ktor-http-wasm-js:3.4.3\",\"io.ktor:ktor-http-cio-wasm-js:3.4.3\",\"io.ktor:ktor-events-wasm-js:3.4.3\",\"io.ktor:ktor-websocket-serialization-wasm-js:3.4.3\",\"io.ktor:ktor-sse-wasm-js:3.4.3\",\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\",\"org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"io.ktor:ktor-http-cio-wasm-js:3.4.3\":{\"id\":\"io.ktor:ktor-http-cio-wasm-js:3.4.3\",\"klibs\":[{\"sha256checksum\":\"a7d3c3ba88bc68bd66d63dd6497953a23495df12c9f565d7b75aac11f48b14b4\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-http-cio-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-http-cio-wasm-js/3.4.3/ktor-http-cio-wasm-js-3.4.3.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"f33fa45fef541448bca822e00cf7f962289fe0905114b8886e7228e9af46a422\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-http-cio-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-http-cio-wasm-js/3.4.3/ktor-http-cio-wasm-js-3.4.3-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\",\"org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\",\"io.ktor:ktor-http-wasm-js:3.4.3\",\"io.ktor:ktor-io-wasm-js:3.4.3\",\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\",\"org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"io.ktor:ktor-websockets-wasm-js:3.4.3\":{\"id\":\"io.ktor:ktor-websockets-wasm-js:3.4.3\",\"klibs\":[{\"sha256checksum\":\"b8a6ab9f60070ba600963c0f854386991e0edb276c2e9e2a20b93e4370fff03a\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-websockets-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-websockets-wasm-js/3.4.3/ktor-websockets-wasm-js-3.4.3.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"cfb36e61527b431b8dbfe8bc20162802818457053388132c911a54007abdb8b1\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-websockets-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-websockets-wasm-js/3.4.3/ktor-websockets-wasm-js-3.4.3-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\",\"org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\",\"io.ktor:ktor-utils-wasm-js:3.4.3\",\"io.ktor:ktor-http-wasm-js:3.4.3\",\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\",\"org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"io.ktor:ktor-network-tls-wasm-js:3.4.3\":{\"id\":\"io.ktor:ktor-network-tls-wasm-js:3.4.3\",\"klibs\":[{\"sha256checksum\":\"817af23a64d63b1b9d8eec275016bb1f6e6fd78a1fe24baf86daf83880c4ae24\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-network-tls-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-network-tls-wasm-js/3.4.3/ktor-network-tls-wasm-js-3.4.3.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"f6943305a638f81fa1023d0150dd339afd3fe2841c72e3ba91b76f8c9d3280d2\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-network-tls-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-network-tls-wasm-js/3.4.3/ktor-network-tls-wasm-js-3.4.3-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\",\"org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\",\"io.ktor:ktor-http-wasm-js:3.4.3\",\"io.ktor:ktor-network-wasm-js:3.4.3\",\"io.ktor:ktor-utils-wasm-js:3.4.3\",\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\",\"org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\":{\"id\":\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\",\"klibs\":[{\"sha256checksum\":\"e267fe680014437a169c00d12020859abd321207b58ff12e884515341eac9833\",\"groupId\":\"org.jetbrains.kotlin\",\"artifactId\":\"kotlin-stdlib-wasm-js\",\"version\":\"2.3.0\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-wasm-js/2.3.0/kotlin-stdlib-wasm-js-2.3.0.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"2c950c1886874b8077e4f32d659a76e30d277760f5faac8621ddaed5e5d800f0\",\"groupId\":\"org.jetbrains.kotlin\",\"artifactId\":\"kotlin-stdlib-wasm-js\",\"version\":\"2.3.0\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-wasm-js/2.3.0/kotlin-stdlib-wasm-js-2.3.0-sources.jar\"]},\"runtimeDependencies\":[],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\":{\"id\":\"org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\",\"klibs\":[{\"sha256checksum\":\"00d542206fff41458574ab7341e80f13629743af68621dd5d3750cd836ca70e5\",\"groupId\":\"org.jetbrains.kotlinx\",\"artifactId\":\"kotlinx-browser-wasm-js\",\"version\":\"0.5.0\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-browser-wasm-js/0.5.0/kotlinx-browser-wasm-js-0.5.0.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"5c87feada4654e72ca24512329e6dc495b6e016212c56f52a5f99b40d3e069cd\",\"groupId\":\"org.jetbrains.kotlinx\",\"artifactId\":\"kotlinx-browser-wasm-js\",\"version\":\"0.5.0\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-browser-wasm-js/0.5.0/kotlinx-browser-wasm-js-0.5.0-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.26.1\":{\"id\":\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.26.1\",\"klibs\":[{\"sha256checksum\":\"1bdc5a5216944b8f9a396d2f0c7df320b43d6921725baad1afc04cc8e2ae48e3\",\"groupId\":\"org.jetbrains.kotlinx\",\"artifactId\":\"atomicfu-wasm-js\",\"version\":\"0.32.1\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlinx/atomicfu-wasm-js/0.26.1/atomicfu-wasm-js-0.32.1.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"ee5ce15d83c60aa529c52369df32bfdf96cb591a0ed0c5068760a59eb89aa6f6\",\"groupId\":\"org.jetbrains.kotlinx\",\"artifactId\":\"atomicfu-wasm-js\",\"version\":\"0.32.1\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlinx/atomicfu-wasm-js/0.26.1/atomicfu-wasm-js-0.32.1-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"io.ktor:ktor-http-wasm-js:3.4.3\":{\"id\":\"io.ktor:ktor-http-wasm-js:3.4.3\",\"klibs\":[{\"sha256checksum\":\"2b9bd365adaf09ba92d58e7eb6a268239829bf874571a4b4779fdafa4f27aad0\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-http-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-http-wasm-js/3.4.3/ktor-http-wasm-js-3.4.3.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"89d0c95a6f1e2b066be03c6be2ee749f39144a540a8c315d1fa2dd2fec324ed9\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-http-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-http-wasm-js/3.4.3/ktor-http-wasm-js-3.4.3-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\",\"org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\",\"io.ktor:ktor-utils-wasm-js:3.4.3\",\"org.jetbrains.kotlinx:kotlinx-serialization-core-wasm-js:1.9.0\",\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\",\"org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"io.ktor:ktor-events-wasm-js:3.4.3\":{\"id\":\"io.ktor:ktor-events-wasm-js:3.4.3\",\"klibs\":[{\"sha256checksum\":\"c8eb7e46310384e23adb98851e2aac69df3f1825642e1a4ffefe02fc2140b8a8\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-events-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-events-wasm-js/3.4.3/ktor-events-wasm-js-3.4.3.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"25a4d89461d074f84b3f77d8bfe875832adfe744c83aee283f4586f37acdffc3\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-events-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-events-wasm-js/3.4.3/ktor-events-wasm-js-3.4.3-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\",\"org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\",\"io.ktor:ktor-utils-wasm-js:3.4.3\",\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\",\"org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"io.ktor:ktor-websocket-serialization-wasm-js:3.4.3\":{\"id\":\"io.ktor:ktor-websocket-serialization-wasm-js:3.4.3\",\"klibs\":[{\"sha256checksum\":\"2e3bcfff995421a2601540c6297768760267f034346c295048a9eaf9a474a205\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-websocket-serialization-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-websocket-serialization-wasm-js/3.4.3/ktor-websocket-serialization-wasm-js-3.4.3.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"e186e6ac4d88ce296ef51d91684444ca0002b4b7761a8dcd2fe55ef1dc8a7b75\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-websocket-serialization-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-websocket-serialization-wasm-js/3.4.3/ktor-websocket-serialization-wasm-js-3.4.3-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\",\"org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\",\"io.ktor:ktor-serialization-wasm-js:3.4.3\",\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\",\"org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"io.ktor:ktor-sse-wasm-js:3.4.3\":{\"id\":\"io.ktor:ktor-sse-wasm-js:3.4.3\",\"klibs\":[{\"sha256checksum\":\"1130ce4112dbfd9eeca7db2806000327297c0942e6df6310369fa26a06357307\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-sse-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-sse-wasm-js/3.4.3/ktor-sse-wasm-js-3.4.3.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"01efe32298e72359115ab1ae29d6f2859a1c5dd05f26b93d7e295c175e2c0ca6\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-sse-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-sse-wasm-js/3.4.3/ktor-sse-wasm-js-3.4.3-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\",\"org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\",\"io.ktor:ktor-utils-wasm-js:3.4.3\",\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\",\"org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"io.ktor:ktor-io-wasm-js:3.4.3\":{\"id\":\"io.ktor:ktor-io-wasm-js:3.4.3\",\"klibs\":[{\"sha256checksum\":\"e4b5eb58ef81c57d1c8f7ca56743cf67c720170fb672e3e652f1120038d33b45\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-io-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-io-wasm-js/3.4.3/ktor-io-wasm-js-3.4.3.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"ea8d6248ba8ba4d35830233e26b6d1962b0cc3a2321658138c06c737ee70d42a\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-io-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-io-wasm-js/3.4.3/ktor-io-wasm-js-3.4.3-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\",\"org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\",\"org.jetbrains.kotlinx:kotlinx-io-core-wasm-js:0.8.2\",\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\",\"org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"io.ktor:ktor-utils-wasm-js:3.4.3\":{\"id\":\"io.ktor:ktor-utils-wasm-js:3.4.3\",\"klibs\":[{\"sha256checksum\":\"90b38b8706aa9fcb47ddf0297e1ece780427c61565c33749e2633f6d11aaee46\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-utils-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-utils-wasm-js/3.4.3/ktor-utils-wasm-js-3.4.3.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"46e8a7df802a32ba97f142a80ce8a353b9dff73c4c411b60b27814bf28b29fdb\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-utils-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-utils-wasm-js/3.4.3/ktor-utils-wasm-js-3.4.3-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\",\"org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\",\"io.ktor:ktor-io-wasm-js:3.4.3\",\"org.jetbrains.kotlinx:kotlinx-serialization-core-wasm-js:1.9.0\",\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\",\"org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"io.ktor:ktor-network-wasm-js:3.4.3\":{\"id\":\"io.ktor:ktor-network-wasm-js:3.4.3\",\"klibs\":[{\"sha256checksum\":\"3d725d6f087730ffc43d1ea158bec770ac4a319b60522e7fba0a700ba46bd965\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-network-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-network-wasm-js/3.4.3/ktor-network-wasm-js-3.4.3.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"a3dff14161f82268c898df6bfbf57ed1b4aa5f049ab3c16015b9f859ec11820f\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-network-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-network-wasm-js/3.4.3/ktor-network-wasm-js-3.4.3-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\",\"org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\",\"io.ktor:ktor-utils-wasm-js:3.4.3\",\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\",\"org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"org.jetbrains.kotlinx:kotlinx-serialization-core-wasm-js:1.9.0\":{\"id\":\"org.jetbrains.kotlinx:kotlinx-serialization-core-wasm-js:1.9.0\",\"klibs\":[{\"sha256checksum\":\"12d94bad5eeac92020cee9b32f0dfb119104c92dcd6d9f41fe707d053cbfc25c\",\"groupId\":\"org.jetbrains.kotlinx\",\"artifactId\":\"kotlinx-serialization-core-wasm-js\",\"version\":\"1.9.0\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-serialization-core-wasm-js/1.9.0/kotlinx-serialization-core-wasm-js-1.9.0.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"2895182b390cf03492e487ccd683364ec62777f7461a6b27d055e8722ea59a98\",\"groupId\":\"org.jetbrains.kotlinx\",\"artifactId\":\"kotlinx-serialization-core-wasm-js\",\"version\":\"1.9.0\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-serialization-core-wasm-js/1.9.0/kotlinx-serialization-core-wasm-js-1.9.0-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"io.ktor:ktor-serialization-wasm-js:3.4.3\":{\"id\":\"io.ktor:ktor-serialization-wasm-js:3.4.3\",\"klibs\":[{\"sha256checksum\":\"8f1ac8dd173aa32937f31c4c509fd13fe029f7051457cda7dda5416a06d5d0f3\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-serialization-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-serialization-wasm-js/3.4.3/ktor-serialization-wasm-js-3.4.3.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"ddc84dd1f279b1c7cd2e476a2b214c1960577116e7abe15c469f8b37fbb46483\",\"groupId\":\"io.ktor\",\"artifactId\":\"ktor-serialization-wasm-js\",\"version\":\"3.4.3\",\"urls\":[\"https://repo1.maven.org/maven2/io/ktor/ktor-serialization-wasm-js/3.4.3/ktor-serialization-wasm-js-3.4.3-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlinx:atomicfu-wasm-js:0.32.1\",\"org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js:1.10.2\",\"io.ktor:ktor-websockets-wasm-js:3.4.3\",\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\",\"org.jetbrains.kotlinx:kotlinx-browser-wasm-js:0.5.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"org.jetbrains.kotlinx:kotlinx-io-core-wasm-js:0.8.2\":{\"id\":\"org.jetbrains.kotlinx:kotlinx-io-core-wasm-js:0.8.2\",\"klibs\":[{\"sha256checksum\":\"b3f21976b6b375486e2988dd5c24af7c24f2e5c5a1e035cfcfc9aa17cf921051\",\"groupId\":\"org.jetbrains.kotlinx\",\"artifactId\":\"kotlinx-io-core-wasm-js\",\"version\":\"0.8.2\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-io-core-wasm-js/0.8.2/kotlinx-io-core-wasm-js-0.8.2.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"7d6dd4ad771e0ded2b4f0403fcff65afb13cb5186f7a672b0238cff736006d94\",\"groupId\":\"org.jetbrains.kotlinx\",\"artifactId\":\"kotlinx-io-core-wasm-js\",\"version\":\"0.8.2\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-io-core-wasm-js/0.8.2/kotlinx-io-core-wasm-js-0.8.2-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlinx:kotlinx-io-bytestring-wasm-js:0.8.2\",\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]},\"org.jetbrains.kotlinx:kotlinx-io-bytestring-wasm-js:0.8.2\":{\"id\":\"org.jetbrains.kotlinx:kotlinx-io-bytestring-wasm-js:0.8.2\",\"klibs\":[{\"sha256checksum\":\"6396c750b13f51fa44133d854ba56c0282aa4a7f44f735f6c0c5ee4191f3462e\",\"groupId\":\"org.jetbrains.kotlinx\",\"artifactId\":\"kotlinx-io-bytestring-wasm-js\",\"version\":\"0.8.2\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-io-bytestring-wasm-js/0.8.2/kotlinx-io-bytestring-wasm-js-0.8.2.klib\"]}],\"sourceJar\":{\"sha256checksum\":\"1f8ee8ea529e72ea14d2482952a099c874c65c58a2eb4efd21464870400c45e8\",\"groupId\":\"org.jetbrains.kotlinx\",\"artifactId\":\"kotlinx-io-bytestring-wasm-js\",\"version\":\"0.8.2\",\"urls\":[\"https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-io-bytestring-wasm-js/0.8.2/kotlinx-io-bytestring-wasm-js-0.8.2-sources.jar\"]},\"runtimeDependencies\":[\"org.jetbrains.kotlin:kotlin-stdlib-wasm-js:2.3.0\"],\"compileTimeDependencies\":[],\"linkTimeDependencies\":[]}}}"
+    },
     "@@rules_go+//go:extensions.bzl%go_sdk": {
       "1.22.4": {
         "aix_ppc64": [

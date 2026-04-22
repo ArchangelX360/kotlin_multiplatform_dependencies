@@ -12,6 +12,18 @@ bazel_dep(name = "kmp", version = "0.0.1")
 kmp_extension = use_extension("@kmp//kmp:extensions.bzl", "kmp")
 kmp_extension.configure(
     deps = ["com.example:mylib:0.0.1"],
+    repositories = ["https://repo1.maven.org/maven2"],
 )
 use_repo(kmp_extension, "kmp_deps")
+```
+
+The extension resolves dependencies during repository/module-extension evaluation. Existing resolution
+facts are reused when the dependency and repository configuration did not change. Fresh resolution
+needs an internal resolver executable backed by a non-generated file; Bazel module extensions cannot
+execute a source-built Bazel target at this phase.
+
+Optional authenticated repositories can be wired with `NETRC`:
+
+```bash
+--repo_env=NETRC=/path/to/netrc
 ```

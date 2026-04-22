@@ -1,7 +1,32 @@
 bazel_dep(name = "kmp", version = "0.0.0", dev_dependency = True)
 bazel_dep(name = "bazel_skylib", version = "1.8.2", dev_dependency = True)
 
+bazel_dep(name = "rules_kotlin", version = "2.3.20")
+
 local_path_override(
     module_name = "kmp",
     path = "../..",
 )
+
+local_repository = use_repo_rule("@bazel_tools//tools/build_defs/repo:local.bzl", "local_repository")
+
+local_repository(
+    name = "local_kmp_resolver",
+    path = "../../resolver/local_repository",
+)
+
+resolver_extension = use_extension("@kmp//kmp:extensions.bzl", "resolver")
+
+override_repo(
+    resolver_extension,
+    kmp_resolver = "local_kmp_resolver",
+)
+
+kmp_extension = use_extension("@kmp//kmp:extensions.bzl", "kmp")
+kmp_extension.configure(
+    deps = [
+        "io.ktor:ktor-client-cio:3.4.3",
+        "io.ktor:ktor-client-core:3.4.3",
+    ],
+)
+use_repo(kmp_extension, "kmp_deps")

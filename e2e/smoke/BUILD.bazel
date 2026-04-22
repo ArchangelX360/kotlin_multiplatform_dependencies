@@ -3,14 +3,17 @@ Add a basic smoke-test target below.
 """
 
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
+load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library")
 
-# Replace with a usage of your rule/macro
-filegroup(name = "empty")
+kt_jvm_library(
+    name = "hello",
+    srcs = ["src/main.kt"],
+)
 
 build_test(
     name = "smoke_test",
     targets = [
-        # targets you add above
-        ":empty",
+        ":hello",
+        "@kmp_deps//:io_ktor_ktor_client_core_wasm_js_3_4_3",
     ],
 )
