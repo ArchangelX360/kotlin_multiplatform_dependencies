@@ -46,7 +46,6 @@ internal class MultiplatformResolver(
 ) {
     private val amperCachePath: Path = cachePath.resolve("amper-cache")
 
-    @Suppress("INVISIBLE_MEMBER")
     internal suspend fun resolveMultiplatformComponentsOf(coordinatesBag: Collection<String>): List<MultiplatformLibrary> {
         val platforms = setOf(ResolutionPlatform.WASM_JS)
         val defaultSettings: SettingsBuilder.() -> Unit = {
@@ -88,48 +87,61 @@ internal class MultiplatformResolver(
                 queue.addAll(root.children.filterIsInstance<MavenDependencyNode>())
                 while (queue.isNotEmpty()) {
                     val node = queue.removeFirstOrNull()
+
                     when {
                         node == null -> {}
                         visited.contains(node) -> {}
                         else -> {
                             visited.add(node)
-
-                            val actualNode = node.actualWasmJsMavenDependency()
-                            val children = actualNode.children.filterIsInstance<MavenDependencyNode>()
-                            queue.addAll(children)
-
-                            val actualChildren = children.map { it.actualWasmJsMavenDependency() }
-
-                            val klibs = actualNode.filesMatching(repoUrls) { it.klib() }
-                            when (klibs.size) {
-                                0 -> {}
-                                1 -> {
-                                    val klib = klibs.singleOrNull()
-                                        ?: error("Expected exactly one klib for dependency ${actualNode.idForBazel}, got: ${klibs}")
-
-                                    val sourceJars = actualNode.filesMatching(repoUrls) { it.sourceJar() }
-                                    require(sourceJars.size <= 1) { "Expected at most one source jar, found ${sourceJars.size}: $sourceJars" }
-                                    val sourceJar = sourceJars.singleOrNull()
-
-                                    val (runtimeDeps, compileDeps) = actualChildren.partition { it.dependency.resolutionConfig.scope == ResolutionScope.RUNTIME }
-                                    resolved.compute(actualNode.idForBazel) { _, v ->
-                                        v?.copy(
-                                            dependencies = (v.dependencies + runtimeDeps.map { it.idForBazel }).distinct()
-                                                .sorted(),
-                                            exportedDependencies = (v.exportedDependencies + compileDeps.map { it.idForBazel }).distinct()
-                                                .sorted(),
-                                        ) ?: MultiplatformLibrary(
-                                            id = actualNode.idForBazel,
-                                            klib = klib,
-                                            sourceJar = sourceJar,
-                                            dependencies = runtimeDeps.map { it.idForBazel }.distinct().sorted(),
-                                            exportedDependencies = compileDeps.map { it.idForBazel }.distinct()
-                                                .sorted(),
-                                        )
-                                    }
+                            val errors = node.resolutionErrors()
+                            when {
+                                errors.isNotEmpty() -> {
+                                    println(buildString {
+                                        appendLine("WARN: resolution errors for node: ${node.idForBazel}")
+                                        errors.forEach { appendLine("- ${it.detailedMessage}") }
+                                    })
                                 }
 
-                                else -> error("expected at most one klib for dependency ${actualNode.idForBazel}, got: ${klibs}")
+                                else -> {
+                                    val actualNode = node.actualWasmJsMavenDependency()
+                                    val children = actualNode.children.filterIsInstance<MavenDependencyNode>()
+                                    queue.addAll(children)
+
+                                    val actualChildren = children.map { it.actualWasmJsMavenDependency() }
+
+                                    val klibs = actualNode.filesMatching(repoUrls) { it.klib() }
+                                    when (klibs.size) {
+                                        0 -> {}
+                                        1 -> {
+                                            val klib = klibs.singleOrNull()
+                                                ?: error("Expected exactly one klib for dependency ${actualNode.idForBazel}, got: ${klibs}")
+
+                                            val sourceJars = actualNode.filesMatching(repoUrls) { it.sourceJar() }
+                                            require(sourceJars.size <= 1) { "Expected at most one source jar, found ${sourceJars.size}: $sourceJars" }
+                                            val sourceJar = sourceJars.singleOrNull()
+
+                                            val (runtimeDeps, compileDeps) = actualChildren.partition { it.dependency.resolutionConfig.scope == ResolutionScope.RUNTIME }
+                                            resolved.compute(actualNode.idForBazel) { _, v ->
+                                                v?.copy(
+                                                    dependencies = (v.dependencies + runtimeDeps.map { it.idForBazel }).distinct()
+                                                        .sorted(),
+                                                    exportedDependencies = (v.exportedDependencies + compileDeps.map { it.idForBazel }).distinct()
+                                                        .sorted(),
+                                                ) ?: MultiplatformLibrary(
+                                                    id = actualNode.idForBazel,
+                                                    klib = klib,
+                                                    sourceJar = sourceJar,
+                                                    dependencies = runtimeDeps.map { it.idForBazel }.distinct()
+                                                        .sorted(),
+                                                    exportedDependencies = compileDeps.map { it.idForBazel }.distinct()
+                                                        .sorted(),
+                                                )
+                                            }
+                                        }
+
+                                        else -> error("expected at most one klib for dependency ${actualNode.idForBazel}, got: $klibs")
+                                    }
+                                }
                             }
                         }
                     }
@@ -164,10 +176,7 @@ private fun String.basenameFromUrl(): String {
     return substringBefore('?').substringBefore('#').substringAfterLast('/')
 }
 
-private fun DependencyNode.resolutionErrors(): List<Message> {
-    return messages.filter { it.severity >= Severity.ERROR } + children.filterIsInstance<MavenDependencyNode>()
-        .flatMap { child -> child.resolutionErrors() }
-}
+private fun DependencyNode.resolutionErrors(): List<Message> = messages.filter { it.severity >= Severity.ERROR }
 
 private fun Map<String, String>.sourceJar(): Boolean {
     return this["org.gradle.category"] == "documentation" && this["org.gradle.docstype"] == "sources" && this["org.jetbrains.kotlin.platform.type"] == "wasm" && this["org.jetbrains.kotlin.wasm.target"] == "js"

@@ -319,6 +319,7 @@ def _resolve_fresh(module_ctx, config):
     for repository in config.repositories:
         args.extend(["--repository", repository])
 
+    # TODO: that does not work
     environment = {}
     netrc = module_ctx.getenv(_NETRC_ENV)
     if netrc:
@@ -330,6 +331,8 @@ def _resolve_fresh(module_ctx, config):
         quiet = True,
         timeout = 600,
     )
+    print(result.stdout)
+    print(result.stderr)
     if result.return_code:
         fail("KMP resolver failed with exit code %s.\nstdout:\n%s\nstderr:\n%s" % (
             result.return_code,
