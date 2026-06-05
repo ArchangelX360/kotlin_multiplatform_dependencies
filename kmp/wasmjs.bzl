@@ -23,6 +23,7 @@ def _kmp_wasmjs_import_impl(ctx):
     source_jar = ctx.file.source_jar
     compile_klibs_depset = depset([klib], transitive = [dep[KtWasmJsInfo].compile_klibs for dep in ctx.attr.exported_deps])
     link_klibs_depset = depset([klib], transitive = [dep[KtWasmJsInfo].link_klibs for dep in ctx.attr.deps + ctx.attr.exported_deps])
+    source_jars = [] if source_jar == None else [source_jar]
     return [
         KtWasmJsInfo(
             compile_klibs = compile_klibs_depset,
@@ -31,7 +32,7 @@ def _kmp_wasmjs_import_impl(ctx):
             source_jar = source_jar,
         ),
         DefaultInfo(
-            files = depset(source_jar, transitive = [compile_klibs_depset, link_klibs_depset]),
+            files = depset(source_jars, transitive = [compile_klibs_depset, link_klibs_depset]),
         ),
     ]
 

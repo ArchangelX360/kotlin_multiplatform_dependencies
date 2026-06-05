@@ -5,7 +5,7 @@ _DEFAULT_REPOSITORIES = [
 ]
 
 _NETRC_ENV = "NETRC"
-_RESOLUTION_FACTS_VERSION = "resolution.v15"
+_RESOLUTION_FACTS_VERSION = "resolution.v16"
 _RESOLVER_REPOSITORY_NAME = "kmp_resolver"
 _RESOLVER_LABEL = "@%s//:resolver" % _RESOLVER_REPOSITORY_NAME
 _RESOLVER_VERSION = "0.0.1"
@@ -39,29 +39,35 @@ def _materialize_resolution(resolution):
 
     materialized_targets = []
     for library_id in sorted(libraries.keys()):
-        library = libraries[library_id]
-        if type(library) != "dict":
-            fail("Unexpected library entry for %s: expected dict, got %s." % (library_id, type(library)))
-
-        declared_id = library.get("id", library_id)
-        if declared_id != library_id:
-            fail("Library key does not match library id: key=%s id=%s" % (library_id, declared_id))
-
-        klibs = [_artifact_label(artifact) for artifact in library.get("klibs", [])]
+        library = _validated_library(library_id, libraries[library_id])
+        klib = _required_library_artifact(library, "klib")
         source_jar = library.get("sourceJar")
-        sources = [] if source_jar == None else [_artifact_label(source_jar)]
         materialized_targets.append({
             "coordinate": library_id,
             "name": target_names[library_id],
-            "compile_klibs": _dedupe(klibs),
-            "link_klibs": _dedupe(klibs),
-            "sources": _dedupe(sources),
-            "deps": _dependency_labels(library, "runtimeDependencies", target_names),
-            "compile_deps": _dependency_labels(library, "compileTimeDependencies", target_names),
-            "link_deps": _dependency_labels(library, "linkTimeDependencies", target_names),
+            "klib": _artifact_label(klib),
+            "source_jar": None if source_jar == None else _artifact_label(source_jar),
+            "deps": _dependency_labels(library, "dependencies", target_names),
+            "exported_deps": _dependency_labels(library, "exportedDependencies", target_names),
         })
 
     return materialized_targets
+
+def _validated_library(library_id, library):
+    if type(library) != "dict":
+        fail("Unexpected library entry for %s: expected dict, got %s." % (library_id, type(library)))
+
+    declared_id = library.get("id", library_id)
+    if declared_id != library_id:
+        fail("Library key does not match library id: key=%s id=%s" % (library_id, declared_id))
+
+    return library
+
+def _required_library_artifact(library, field):
+    artifact = library.get(field)
+    if type(artifact) != "dict":
+        fail("Library %s is missing %s artifact." % (library.get("id", "<unknown>"), field))
+    return artifact
 
 def _manifest_libraries(resolution):
     libraries = resolution.get("libraries", {})
@@ -128,9 +134,10 @@ def _basename_from_url(url):
 
 def _collect_artifacts(resolution):
     artifacts = {}
-    for library in _manifest_libraries(resolution).values():
-        for artifact in library.get("klibs", []):
-            _add_artifact(artifacts, artifact)
+    libraries = _manifest_libraries(resolution)
+    for library_id in sorted(libraries.keys()):
+        library = _validated_library(library_id, libraries[library_id])
+        _add_artifact(artifacts, _required_library_artifact(library, "klib"))
         source_jar = library.get("sourceJar")
         if source_jar != None:
             _add_artifact(artifacts, source_jar)
@@ -220,13 +227,12 @@ def _render_wasmjs_import(target):
     lines = [
         "kmp_wasmjs_import(",
         "    name = %s," % _quote(target["name"]),
+        "    klib = %s," % _quote(target["klib"]),
     ]
-    lines.extend(_render_label_list_attr("compile_klibs", target["compile_klibs"]))
-    lines.extend(_render_label_list_attr("link_klibs", target["link_klibs"]))
-    lines.extend(_render_label_list_attr("source_jars", target["sources"]))
+    if target["source_jar"] != None:
+        lines.append("    source_jar = %s," % _quote(target["source_jar"]))
     lines.extend(_render_label_list_attr("deps", target["deps"]))
-    lines.extend(_render_label_list_attr("compile_deps", target["compile_deps"]))
-    lines.extend(_render_label_list_attr("link_deps", target["link_deps"]))
+    lines.extend(_render_label_list_attr("exported_deps", target["exported_deps"]))
     lines.append(")")
     return lines
 
