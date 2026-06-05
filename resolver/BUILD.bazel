@@ -39,7 +39,7 @@ kt_jvm_library(
 java_binary(
     name = "resolver",
     jvm_flags = ["--add-modules=java.net.http"],
-    main_class = "org.jetbrains.kmp.MainKt",
+    main_class = "org.jetbrains.kmp.resolver.MainKt",
     runtime_deps = [":resolver_lib"],
 )
 
