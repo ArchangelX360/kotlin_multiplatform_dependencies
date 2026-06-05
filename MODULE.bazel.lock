@@ -276,7 +276,7 @@
   "moduleExtensions": {
     "//kmp:extensions.bzl%resolver": {
       "general": {
-        "bzlTransitiveDigest": "b5CqxO7EjSQVlG3Hz+sezE/fwf/6kte/ta6w8wZNqcw=",
+        "bzlTransitiveDigest": "fBpjv0qPbCPDULdvjMLYWR1VBldzQL9ONpyGlKzoli8=",
         "usagesDigest": "6VwiUzC0Ke83aTjIVwanClmwsduQZIjhHNxxDwrw1no=",
         "recordedInputs": [
           "REPO_MAPPING:,bazel_tools bazel_tools"
