@@ -1,5 +1,6 @@
 package org.jetbrains.kmp.resolver
 
+import org.jetbrains.amper.dependency.resolution.MavenRepository
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -37,12 +38,12 @@ class NetrcTest {
 
         assertEquals(
             listOf(
-                JarRepository(
+                MavenRepository(
                     url = "https://repo.example.com/maven2",
                     userName = "alice",
                     password = "token-a",
                 ),
-                JarRepository(
+                MavenRepository(
                     url = "https://cache-redirector.example.org/repo1.maven.org/maven2",
                 ),
             ),
