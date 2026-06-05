@@ -1,4 +1,4 @@
-package org.jetbrains.kmp
+package org.jetbrains.kmp.resolver
 
 import kotlinx.serialization.Serializable
 import org.jetbrains.amper.dependency.resolution.*

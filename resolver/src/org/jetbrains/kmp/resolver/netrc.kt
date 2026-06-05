@@ -1,4 +1,4 @@
-package org.jetbrains.kmp
+package org.jetbrains.kmp.resolver
 
 import org.jetbrains.amper.dependency.resolution.MavenRepository
 import java.net.URI

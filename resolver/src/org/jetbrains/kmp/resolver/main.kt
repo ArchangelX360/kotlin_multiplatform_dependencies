@@ -1,4 +1,4 @@
-package org.jetbrains.kmp
+package org.jetbrains.kmp.resolver
 
 import com.github.ajalt.clikt.command.main
 
