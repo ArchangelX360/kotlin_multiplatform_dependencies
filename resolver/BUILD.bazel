@@ -27,10 +27,10 @@ kt_compiler_plugin(
 kt_jvm_library(
     name = "resolver_lib",
     srcs = [
-        "src/org/jetbrains/kmp/commands/ResolveCommand.kt",
+        "src/org/jetbrains/kmp/MultiplatformResolver.kt",
+        "src/org/jetbrains/kmp/ResolveCommand.kt",
         "src/org/jetbrains/kmp/main.kt",
         "src/org/jetbrains/kmp/netrc.kt",
-        "src/org/jetbrains/kmp/support.kt",
     ],
     plugins = [":serialization_plugin"],
     deps = RESOLVER_DEPS,

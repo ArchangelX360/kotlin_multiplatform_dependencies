@@ -1,83 +1,35 @@
-package org.jetbrains.kmp.commands
+package org.jetbrains.kmp
 
-import com.github.ajalt.clikt.command.SuspendingCliktCommand
-import com.github.ajalt.clikt.parameters.options.convert
-import com.github.ajalt.clikt.parameters.options.multiple
-import com.github.ajalt.clikt.parameters.options.option
-import com.github.ajalt.clikt.parameters.options.required
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.encodeToStream
 import org.jetbrains.amper.dependency.resolution.*
 import org.jetbrains.amper.dependency.resolution.diagnostics.Message
 import org.jetbrains.amper.dependency.resolution.diagnostics.Severity
 import org.jetbrains.amper.dependency.resolution.diagnostics.detailedMessage
-import org.jetbrains.kmp.JarRepository
-import org.jetbrains.kmp.readNetrcCredentialsByMachine
-import org.jetbrains.kmp.withNetrcCredentials
 import java.net.URI
 import java.nio.file.Path
-import kotlin.io.path.createParentDirectories
-import kotlin.io.path.outputStream
-
-class ResolveCommand : SuspendingCliktCommand("resolver") {
-    private val coordinates by option(
-        "--coordinate",
-        help = "Maven coordinate to resolve. Repeat for multiple values.",
-    ).multiple(required = true)
-
-    private val outputManifest by option(
-        "--output-manifest-file",
-        help = "Path to the output manifest file.",
-    ).convert { Path.of(it) }.required()
-
-    private val repositories by option(
-        "--repository",
-        help = "Maven repository URL. Repeat for multiple values.",
-    ).multiple(required = true)
-
-    override suspend fun run() {
-        val cache = outputManifest.parent
-        val credentials = readNetrcCredentialsByMachine()
-        val resolver = MultiplatformResolver(
-            cachePath = cache,
-            manifestPath = outputManifest,
-            mavenRepositories = repositories.withNetrcCredentials(credentials),
-        )
-        resolver.dumpManifestToCache(
-            BazelManifest(
-                askedCoordinates = coordinates,
-                askedRepositories = repositories,
-                libraries = resolver.resolveMultiplatformComponentsOf(coordinates.toSet()).associateBy { it.id },
-            )
-        )
-    }
-}
 
 internal typealias MultiplatformLibraryId = String
 
-internal sealed class MultiplatformLibrary {
-    data object NoneMatching : MultiplatformLibrary()
+@Serializable
+internal data class MultiplatformLibrary(
+    val id: MultiplatformLibraryId,
 
-    @Serializable
-    data class Resolved(
-        val id: MultiplatformLibraryId,
-        /**
-         * .klib of this imported dependency, exposed to the compile library path of direct dependents.
-         */
-        val klib: MultiplatformLibraryArtifact,
-        val sourceJar: MultiplatformLibraryArtifact?,
-        /**
-         * Dependencies of this library, exposed to the link path of dependents transitively.
-         */
-        val dependencies: List<MultiplatformLibraryId>,
-        /**
-         * Dependencies of this library, exposed to the link path of dependents transitively, and exposed to the compile library path of *direct* dependents.
-         */
-        val exportedDependencies: List<MultiplatformLibraryId>,
-    ) : MultiplatformLibrary()
-}
+    /**
+     * .klib of this imported dependency, exposed to the compile library path of direct dependents.
+     */
+    val klib: MultiplatformLibraryArtifact,
+    val sourceJar: MultiplatformLibraryArtifact?,
+
+    /**
+     * Dependencies of this library, exposed to the link path of dependents transitively.
+     */
+    val dependencies: List<MultiplatformLibraryId>,
+
+    /**
+     * Dependencies of this library, exposed to the link path of dependents transitively, and exposed to the compile library path of *direct* dependents.
+     */
+    val exportedDependencies: List<MultiplatformLibraryId>,
+)
 
 @Serializable
 internal data class MultiplatformLibraryArtifact(
@@ -88,46 +40,14 @@ internal data class MultiplatformLibraryArtifact(
     val urls: List<String>,
 )
 
-@Serializable
-internal data class BazelManifest(
-    val askedCoordinates: List<String>,
-    val askedRepositories: List<String>,
-    val libraries: Map<MultiplatformLibraryId, MultiplatformLibrary.Resolved>,
-)
-
-private class MultiplatformResolver(
-    private val cachePath: Path,
-    private val manifestPath: Path,
-    mavenRepositories: List<JarRepository>,
+internal class MultiplatformResolver(
+    cachePath: Path,
+    private val repositories: List<MavenRepository>,
 ) {
     private val amperCachePath: Path = cachePath.resolve("amper-cache")
 
-    private val repositories by lazy {
-        mavenRepositories.map {
-            MavenRepository(
-                it.url,
-                userName = it.userName,
-                password = it.password,
-            )
-        }
-    }
-
-    companion object {
-        private val json = Json {
-            allowStructuredMapKeys = true
-        }
-    }
-
-    @OptIn(ExperimentalSerializationApi::class)
-    fun dumpManifestToCache(manifest: BazelManifest) {
-        manifestPath.createParentDirectories()
-        manifestPath.outputStream().use { output ->
-            json.encodeToStream(manifest, output)
-        }
-    }
-
     @Suppress("INVISIBLE_MEMBER")
-    suspend fun resolveMultiplatformComponentsOf(coordinatesBag: Set<String>): Set<MultiplatformLibrary.Resolved> {
+    internal suspend fun resolveMultiplatformComponentsOf(coordinatesBag: Collection<String>): List<MultiplatformLibrary> {
         val platforms = setOf(ResolutionPlatform.WASM_JS)
         val defaultSettings: SettingsBuilder.() -> Unit = {
             this.platforms = setOf(ResolutionPlatform.WASM_JS)
@@ -157,13 +77,12 @@ private class MultiplatformResolver(
             ),
             templateContext = templateContext,
         )
-        val graph =
-            Resolver().resolveDependencies(root = root, resolutionLevel = ResolutionLevel.NETWORK, transitive = true)
+        Resolver().resolveDependencies(root = root, resolutionLevel = ResolutionLevel.NETWORK, transitive = true)
         val errors = root.resolutionErrors()
         return when {
             errors.isEmpty() -> {
                 val repoUrls = repositories.map { repository -> repository.url }
-                val resolved = mutableMapOf<String, MultiplatformLibrary.Resolved>()
+                val resolved = mutableMapOf<String, MultiplatformLibrary>()
                 val visited = mutableSetOf<MavenDependencyNode>()
                 val queue = ArrayDeque<MavenDependencyNode>()
                 queue.addAll(root.children.filterIsInstance<MavenDependencyNode>())
@@ -195,14 +114,17 @@ private class MultiplatformResolver(
                                     val (runtimeDeps, compileDeps) = actualChildren.partition { it.dependency.resolutionConfig.scope == ResolutionScope.RUNTIME }
                                     resolved.compute(actualNode.idForBazel) { _, v ->
                                         v?.copy(
-                                            dependencies = (v.dependencies + runtimeDeps.map { it.idForBazel }).distinct(),
-                                            exportedDependencies = (v.exportedDependencies + compileDeps.map { it.idForBazel }).distinct(),
-                                        ) ?: MultiplatformLibrary.Resolved(
+                                            dependencies = (v.dependencies + runtimeDeps.map { it.idForBazel }).distinct()
+                                                .sorted(),
+                                            exportedDependencies = (v.exportedDependencies + compileDeps.map { it.idForBazel }).distinct()
+                                                .sorted(),
+                                        ) ?: MultiplatformLibrary(
                                             id = actualNode.idForBazel,
                                             klib = klib,
                                             sourceJar = sourceJar,
-                                            dependencies = runtimeDeps.map { it.idForBazel }.distinct(),
-                                            exportedDependencies = compileDeps.map { it.idForBazel }.distinct(),
+                                            dependencies = runtimeDeps.map { it.idForBazel }.distinct().sorted(),
+                                            exportedDependencies = compileDeps.map { it.idForBazel }.distinct()
+                                                .sorted(),
                                         )
                                     }
                                 }
@@ -213,7 +135,7 @@ private class MultiplatformResolver(
                     }
                 }
 
-                resolved.values.toSet()
+                resolved.values.sortedBy { it.id }
             }
 
             else -> {
@@ -260,8 +182,7 @@ private fun Map<String, String>.klib(): Boolean {
 @Suppress("INVISIBLE_REFERENCE")
 private suspend fun MavenDependencyNode.actualMavenDependencyOfVariantsMatching(attributeMatcher: (Map<String, String>) -> Boolean): MavenDependencyNode {
     val originalDep = this.dependency as MavenDependencyImpl
-    val availableAts =
-        originalDep.variants.filter { attributeMatcher(it.attributes) }.map { it.`available-at` }.toSet()
+    val availableAts = originalDep.variants.filter { attributeMatcher(it.attributes) }.map { it.`available-at` }.toSet()
     return when {
         availableAts.all { it == null } -> this // no variant indirection, it means that dependency is the actual one we need to consider
         availableAts.singleOrNull() == null -> error("all matched variants must point to the same Maven dependency, but got: ${originalDep.variants}")
@@ -310,7 +231,7 @@ private fun MavenDependency.preferredRepositoryUrl(): String? = runCatching {
     javaClass.getMethod("getRepository\$main").invoke(this) as? MavenRepository
 }.getOrNull()?.url
 
-internal fun artifactUrls(
+private fun artifactUrls(
     group: String,
     module: String,
     version: String,
@@ -369,10 +290,4 @@ private fun String.toMavenNode(context: Context): MavenDependencyNodeWithContext
         ),
         isBom = isBom,
     )
-}
-
-internal data class ResolvableLibrary(
-    val mavenCoordinates: String,
-) : Comparable<ResolvableLibrary> {
-    override fun compareTo(other: ResolvableLibrary): Int = mavenCoordinates.compareTo(other.mavenCoordinates)
 }

@@ -1,0 +1,63 @@
+package org.jetbrains.kmp
+
+import com.github.ajalt.clikt.command.SuspendingCliktCommand
+import com.github.ajalt.clikt.parameters.options.convert
+import com.github.ajalt.clikt.parameters.options.multiple
+import com.github.ajalt.clikt.parameters.options.option
+import com.github.ajalt.clikt.parameters.options.required
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.encodeToStream
+import java.nio.file.Path
+import kotlin.io.path.createParentDirectories
+import kotlin.io.path.outputStream
+
+class ResolveCommand : SuspendingCliktCommand("resolver") {
+    private val coordinates by option(
+        "--coordinate",
+        help = "Maven coordinate to resolve, can be specified multiple times for resolving many coordinates at once.",
+    ).multiple(required = true)
+
+    private val outputManifest by option(
+        "--output-manifest-file",
+        help = "Path to the output manifest file.",
+    ).convert { Path.of(it) }.required()
+
+    private val repositories by option(
+        "--repository",
+        help = "Maven repository URL, can be specified multiple times for resolving against many repositories.",
+    ).multiple(required = true)
+
+    @OptIn(ExperimentalSerializationApi::class)
+    override suspend fun run() {
+        val credentials = readNetrcCredentialsByMachine()
+        val resolver = MultiplatformResolver(
+            cachePath = outputManifest.parent,
+            repositories = repositories.withNetrcCredentials(credentials),
+        )
+        val manifest = BazelManifest(
+            askedCoordinates = coordinates.sorted(),
+            askedRepositories = repositories.sorted(),
+            libraries = resolver.resolveMultiplatformComponentsOf(coordinates).associateBy { it.id },
+        )
+        outputManifest.createParentDirectories()
+        outputManifest.outputStream().use { output ->
+            json.encodeToStream(manifest, output)
+        }
+    }
+
+    companion object {
+        private val json = Json {
+            allowStructuredMapKeys = true
+        }
+    }
+}
+
+@Serializable
+private data class BazelManifest(
+    val askedCoordinates: List<String>,
+    val askedRepositories: List<String>,
+    val libraries: Map<MultiplatformLibraryId, MultiplatformLibrary>,
+)
+

@@ -1,14 +1,16 @@
 package org.jetbrains.kmp
 
+import org.jetbrains.amper.dependency.resolution.MavenRepository
 import java.net.URI
 import java.nio.file.Path
+import kotlin.collections.get
 import kotlin.io.path.exists
 import kotlin.io.path.readText
 
-internal fun List<String>.withNetrcCredentials(credentialsByMachine: Map<String, Pair<String, String>>): List<JarRepository> {
+internal fun List<String>.withNetrcCredentials(credentialsByMachine: Map<String, Pair<String, String>>): List<MavenRepository> {
     return map { repository ->
         val credentials = credentialsByMachine[repository.repositoryHost()]
-        JarRepository(
+        MavenRepository(
             url = repository,
             userName = credentials?.first.orEmpty(),
             password = credentials?.second.orEmpty(),
