@@ -98,6 +98,7 @@ internal class MultiplatformResolver(
         val errors = root.resolutionErrors()
         return when {
             errors.isEmpty() -> {
+                val resolutionErrors = mutableListOf<String>()
                 val resolved = mutableMapOf<String, UnresolvedNode>()
                 val visited = mutableSetOf<MavenDependencyNode>()
                 val queue = ArrayDeque<MavenDependencyNode>()
@@ -113,8 +114,7 @@ internal class MultiplatformResolver(
                             val errors = node.resolutionErrors()
                             when {
                                 errors.isNotEmpty() -> {
-                                    // TODO: throw probably?
-                                    println(buildString {
+                                    resolutionErrors.add(buildString {
                                         appendLine("WARN: resolution errors for node: ${node.idForBazel}")
                                         errors.forEach { appendLine("- ${it.detailedMessage}") }
                                     })
@@ -165,6 +165,11 @@ internal class MultiplatformResolver(
                         }
                     }
                 }
+
+                require(resolutionErrors.isEmpty()) {
+                    "failed to resolve with: ${resolutionErrors.joinToString("\n")}"
+                }
+
                 resolved
             }
 

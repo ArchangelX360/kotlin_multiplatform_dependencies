@@ -48,11 +48,14 @@ internal suspend fun UnresolvedNode.resolve(
     repositories: List<MavenRepository>,
     artifactUrlResolver: ArtifactUrlResolver,
 ): MultiplatformLibrary = coroutineScope {
+    val resolvedKlib = async { klib.resolve(repositories, artifactUrlResolver) }
+    val resolvedSourceJar = sourceJar?.let { async { it.resolve(repositories, artifactUrlResolver) } }
+
     MultiplatformLibrary(
         id = id,
         variantId = variantId,
-        klib = klib.resolve(repositories, artifactUrlResolver),
-        sourceJar = sourceJar?.resolve(repositories, artifactUrlResolver),
+        klib = resolvedKlib.await(),
+        sourceJar = resolvedSourceJar?.await(),
         dependencies = dependencies,
         exportedDependencies = exportedDependencies,
     )
