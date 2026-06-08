@@ -14,6 +14,8 @@ RESOLVER_DEPS = [
     artifact("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm", "resolver_maven"),
     artifact("org.jetbrains.kotlinx:kotlinx-serialization-core-jvm", "resolver_maven"),
     artifact("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm", "resolver_maven"),
+    artifact("ch.qos.logback:logback-core", "resolver_maven"),
+    artifact("org.slf4j:slf4j-api", "resolver_maven"),
 ]
 
 RESOLVER_TEST_DEPS = RESOLVER_DEPS + [
@@ -36,6 +38,10 @@ kt_jvm_library(
         "src/org/jetbrains/kmp/resolver/main.kt",
     ],
     plugins = [":serialization_plugin"],
+    resource_strip_prefix = "resources",
+    resources = glob(
+        ["resources/**/*"],
+    ),
     deps = RESOLVER_DEPS,
 )
 

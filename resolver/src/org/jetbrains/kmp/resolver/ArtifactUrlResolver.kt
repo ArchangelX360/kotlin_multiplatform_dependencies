@@ -8,6 +8,8 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.amper.dependency.resolution.MavenRepository
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.util.concurrent.ConcurrentHashMap
 
 internal data class UnresolvedMultiplatformLibraryArtifact(
@@ -67,6 +69,8 @@ internal sealed class ArtifactFile {
 }
 
 internal class ArtifactUrlResolver : AutoCloseable {
+    val logger: Logger = LoggerFactory.getLogger(this::class.java)
+
     private val httpClient = HttpClient(CIO) {
         followRedirects = true
         expectSuccess = false
@@ -76,6 +80,7 @@ internal class ArtifactUrlResolver : AutoCloseable {
     suspend fun artifactExistsAt(repository: MavenRepository, artifactPath: String): ArtifactFile {
         val artifactUrl = "${repository.url.trimEnd('/')}/$artifactPath"
         return availabilityByUrl.getOrPut(artifactUrl) {
+            logger.info("[$artifactUrl] checking for existence of artifact...")
             val resolved = httpClient.head {
                 url(artifactUrl)
                 val username = repository.userName
@@ -86,8 +91,14 @@ internal class ArtifactUrlResolver : AutoCloseable {
                 }
             }.status.isSuccess()
             when {
-                resolved -> ArtifactFile.Resolved(artifactUrl)
-                else -> ArtifactFile.NotFound
+                resolved -> {
+                    logger.info("[$artifactUrl] found")
+                    ArtifactFile.Resolved(artifactUrl)
+                }
+                else -> {
+                    logger.info("[$artifactUrl] not found")
+                    ArtifactFile.NotFound
+                }
             }
         }
     }
