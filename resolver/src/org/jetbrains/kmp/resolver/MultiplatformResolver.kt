@@ -115,7 +115,7 @@ internal class MultiplatformResolver(
                             when {
                                 errors.isNotEmpty() -> {
                                     resolutionErrors.add(buildString {
-                                        appendLine("WARN: resolution errors for node: ${node.idForBazel}")
+                                        appendLine("ERROR: resolution errors for node: ${node.idForBazel}")
                                         errors.forEach { appendLine("- ${it.detailedMessage}") }
                                     })
                                 }
