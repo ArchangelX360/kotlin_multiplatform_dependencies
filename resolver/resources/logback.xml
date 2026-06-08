@@ -5,6 +5,9 @@
     </encoder>
   </appender>
 
+  <logger name="org.jetbrains.amper.dependency.resolution" level="ERROR" />
+  <logger name="dr/files.kt" level="ERROR" />
+
   <root level="info">
     <appender-ref ref="STDOUT" />
   </root>
