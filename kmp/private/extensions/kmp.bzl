@@ -1,10 +1,12 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
+load("@bazel_tools//tools/build_defs/repo:utils.bzl", "get_auth")
 
 _DEFAULT_REPOSITORIES = [
     "https://repo1.maven.org/maven2",
 ]
 
 _NETRC_ENV = "NETRC"
+_REPOSITORY_CREDENTIALS_FILE = "repository-credentials.json"
 _RESOLUTION_FACTS_VERSION = "resolution.v16"
 _RESOLVER_REPOSITORY_NAME = "kmp_resolver"
 _RESOLVER_LABEL = "@%s//:resolver" % _RESOLVER_REPOSITORY_NAME
@@ -279,18 +281,12 @@ def _read_configure_tag(module_ctx):
     if len(root_tags) > 1:
         fail("Only one kmp.configure(...) tag is supported in the root module.")
     if root_tags:
-        return _configure_from_tag(root_tags[0])
+        return root_tags[0]
     if non_root_tags:
-        return _configure_from_tag(non_root_tags[0])
+        return non_root_tags[0]
     return struct(
         deps = [],
         repositories = _DEFAULT_REPOSITORIES,
-    )
-
-def _configure_from_tag(tag):
-    return struct(
-        deps = tag.deps,
-        repositories = tag.repositories,
     )
 
 def _resolve_with_facts(module_ctx, config):
@@ -319,20 +315,16 @@ def _resolve_fresh(module_ctx, config):
     for repository in config.repositories:
         args.extend(["--repository", repository])
 
-    # TODO: that does not work
-    environment = {}
-    netrc = module_ctx.getenv(_NETRC_ENV)
-    if netrc:
-        environment[_NETRC_ENV] = netrc
+    repository_credentials = _repository_credentials(module_ctx, config.repositories)
+    if repository_credentials:
+        module_ctx.file(_REPOSITORY_CREDENTIALS_FILE, json.encode(repository_credentials), executable = False)
+        args.extend(["--repository-credentials-file", module_ctx.path(_REPOSITORY_CREDENTIALS_FILE)])
 
     result = module_ctx.execute(
         args,
-        environment = environment,
         quiet = True,
         timeout = 600,
     )
-    print(result.stdout)
-    print(result.stderr)
     if result.return_code:
         fail("KMP resolver failed with exit code %s.\nstdout:\n%s\nstderr:\n%s" % (
             result.return_code,
@@ -341,6 +333,41 @@ def _resolve_fresh(module_ctx, config):
         ))
 
     return module_ctx.read(resolution_path)
+
+def _repository_credentials(module_ctx, repositories):
+    auth = get_auth(_auth_context(module_ctx), repositories)
+    credentials = []
+    for repository in repositories:
+        repository_auth = auth.get(repository)
+        if repository_auth == None:
+            continue
+
+        auth_type = repository_auth.get("type")
+        login = repository_auth.get("login")
+        password = repository_auth.get("password")
+        if auth_type != "basic" or not login or not password:
+            fail("KMP resolver supports only basic repository auth for %s, but get_auth returned %s auth." % (
+                repository,
+                auth_type,
+            ))
+
+        credentials.append({
+            "repositoryUrl": repository,
+            "username": login,
+            "password": password,
+        })
+    return credentials
+
+def _auth_context(module_ctx):
+    return struct(
+        attr = struct(
+            auth_patterns = {},
+            netrc = module_ctx.getenv(_NETRC_ENV) or "",
+        ),
+        os = module_ctx.os,
+        path = module_ctx.path,
+        read = module_ctx.read,
+    )
 
 def _resolution_fact_key(config):
     return "%s|deps=%s|repositories=%s" % (
@@ -352,7 +379,7 @@ def _resolution_fact_key(config):
 def _list_key(values):
     return ",".join(["%d:%s" % (len(value), value) for value in values])
 
-def _register_artifact_repositories(module_ctx, resolution):
+def _register_artifact_repositories(resolution):
     artifacts = _collect_artifacts(resolution)
 
     used_names = {}
@@ -378,7 +405,7 @@ def _kmp_extension_impl(module_ctx):
     config = _read_configure_tag(module_ctx)
     resolution_json = _resolve_with_facts(module_ctx, config)
     resolution = json.decode(resolution_json)
-    _register_artifact_repositories(module_ctx, resolution)
+    _register_artifact_repositories(resolution)
 
     repository_name = "kmp_deps"
     _kmp_deps_repository(
@@ -386,11 +413,19 @@ def _kmp_extension_impl(module_ctx):
         build_file_content = _render_build_file(_materialize_resolution(resolution)),
     )
 
-    return module_ctx.extension_metadata(
-        root_module_direct_deps = [repository_name],
-        root_module_direct_dev_deps = [],
-        facts = {_resolution_fact_key(config): resolution_json} if config.deps else {},
-    )
+    facts = {_resolution_fact_key(config): resolution_json} if config.deps else {}
+    if module_ctx.root_module_has_non_dev_dependency:
+        return module_ctx.extension_metadata(
+            root_module_direct_deps = [repository_name],
+            root_module_direct_dev_deps = [],
+            facts = facts,
+        )
+    else:
+        return module_ctx.extension_metadata(
+            root_module_direct_deps = [],
+            root_module_direct_dev_deps = [repository_name],
+            facts = facts,
+        )
 
 def _resolver_extension_impl(module_ctx):
     http_archive(

@@ -13,6 +13,11 @@ internal typealias MultiplatformLibraryId = String
 @Serializable
 internal data class MultiplatformLibrary(
     val id: MultiplatformLibraryId,
+    /**
+     * ID of the resolved multiplatform library, usually [id] would point to the umbrella library like `kotlin-stdlib`,
+     * while [variantId] would point to the variant library like `kotlin-stdlib-wasm-js`.
+     */
+    val variantId: MultiplatformLibraryId,
 
     /**
      * .klib of this imported dependency, exposed to the compile library path of direct dependents.
@@ -96,6 +101,7 @@ internal class MultiplatformResolver(
                             val errors = node.resolutionErrors()
                             when {
                                 errors.isNotEmpty() -> {
+                                    // TODO: throw probably?
                                     println(buildString {
                                         appendLine("WARN: resolution errors for node: ${node.idForBazel}")
                                         errors.forEach { appendLine("- ${it.detailedMessage}") }
@@ -120,23 +126,26 @@ internal class MultiplatformResolver(
                                             require(sourceJars.size <= 1) { "Expected at most one source jar, found ${sourceJars.size}: $sourceJars" }
                                             val sourceJar = sourceJars.singleOrNull()
 
-                                            val (runtimeDeps, compileDeps) = actualChildren.partition { it.dependency.resolutionConfig.scope == ResolutionScope.RUNTIME }
-                                            resolved.compute(actualNode.idForBazel) { _, v ->
-                                                v?.copy(
-                                                    dependencies = (v.dependencies + runtimeDeps.map { it.idForBazel }).distinct()
-                                                        .sorted(),
-                                                    exportedDependencies = (v.exportedDependencies + compileDeps.map { it.idForBazel }).distinct()
-                                                        .sorted(),
-                                                ) ?: MultiplatformLibrary(
-                                                    id = actualNode.idForBazel,
+                                            val (runtimeDeps, compileDeps) = actualChildren.partition {
+                                                it.dependency.resolutionConfig.scope == ResolutionScope.RUNTIME
+                                            }
+                                            val initial by lazy {
+                                                MultiplatformLibrary(
+                                                    id = node.idForBazel,
+                                                    variantId = actualNode.idForBazel,
                                                     klib = klib,
                                                     sourceJar = sourceJar,
-                                                    dependencies = runtimeDeps.map { it.idForBazel }.distinct()
-                                                        .sorted(),
-                                                    exportedDependencies = compileDeps.map { it.idForBazel }.distinct()
-                                                        .sorted(),
+                                                    dependencies = runtimeDeps.asBazelIds(),
+                                                    exportedDependencies = compileDeps.asBazelIds(),
                                                 )
                                             }
+                                            val existing = resolved[node.idForBazel] ?: resolved[actualNode.idForBazel]
+                                            val updated = existing?.copy(
+                                                dependencies = existing.dependencies + runtimeDeps.asBazelIds(),
+                                                exportedDependencies = existing.exportedDependencies + compileDeps.asBazelIds(),
+                                            )
+                                            resolved[node.idForBazel] = updated ?: initial // TODO: when supporting other targets than WasmJS, we may want the umbrella ID not to be considered the same as the variant ID
+                                            resolved[actualNode.idForBazel] = updated ?: initial
                                         }
 
                                         else -> error("expected at most one klib for dependency ${actualNode.idForBazel}, got: $klibs")
@@ -161,6 +170,8 @@ internal class MultiplatformResolver(
         }
     }
 }
+
+private fun List<MavenDependencyNode>.asBazelIds() = map { it.idForBazel }.sorted().distinct()
 
 private val MavenDependencyNode.idForBazel get() = "$group:$module:${resolvedVersion().orUnspecified()}"
 

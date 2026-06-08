@@ -29,12 +29,20 @@ class ResolveCommand : SuspendingCliktCommand("resolver") {
         help = "Maven repository URL, can be specified multiple times for resolving against many repositories.",
     ).multiple(required = true)
 
+    private val repositoryCredentialsFile by option(
+        "--repository-credentials-file",
+        help = "Path to JSON repository credentials resolved by the caller.",
+    ).convert { Path.of(it) }
+
     @OptIn(ExperimentalSerializationApi::class)
     override suspend fun run() {
-        val credentials = readNetrcCredentialsByMachine()
+        val credentials = when (val credentialsFile = repositoryCredentialsFile) {
+            null -> emptyMap()
+            else -> RepositoryCredentials.fromFile(credentialsFile)
+        }
         val resolver = MultiplatformResolver(
             cachePath = outputManifest.parent,
-            repositories = repositories.withNetrcCredentials(credentials),
+            repositories = repositories.withRepositoryCredentials(credentials),
         )
         val manifest = BazelManifest(
             askedCoordinates = coordinates.sorted(),
@@ -60,4 +68,3 @@ private data class BazelManifest(
     val askedRepositories: List<String>,
     val libraries: Map<MultiplatformLibraryId, MultiplatformLibrary>,
 )
-

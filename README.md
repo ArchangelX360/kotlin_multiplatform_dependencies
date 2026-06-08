@@ -16,14 +16,3 @@ kmp_extension.configure(
 )
 use_repo(kmp_extension, "kmp_deps")
 ```
-
-The extension resolves dependencies during repository/module-extension evaluation. Existing resolution
-facts are reused when the dependency and repository configuration did not change. Fresh resolution
-needs an internal resolver executable backed by a non-generated file; Bazel module extensions cannot
-execute a source-built Bazel target at this phase.
-
-Optional authenticated repositories can be wired with `NETRC`:
-
-```bash
---repo_env=NETRC=/path/to/netrc
-```

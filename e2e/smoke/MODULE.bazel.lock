@@ -267,13 +267,10 @@
   "moduleExtensions": {
     "@@kmp+//kmp:extensions.bzl%kmp": {
       "general": {
-        "bzlTransitiveDigest": "2M7jDTl9vfhJE3r4Vaj1tAo1lWGVd0dT8EZDzuuNnaw=",
+        "bzlTransitiveDigest": "IEN9QTWo2QIi1PPT+HIyXivi31RaFHOEMtn4b8nynOE=",
         "usagesDigest": "W/iyuDZwgOQ1ckRMT5s+JpjTKmrdda/02d4siBoVhRA=",
         "recordedInputs": [
-          "REPO_MAPPING:kmp+,bazel_tools bazel_tools",
-          "REPO_MAPPING:kmp+,kmp_resolver +local_repository+local_kmp_resolver",
-          "FILE:@@+local_repository+local_kmp_resolver//resolver 7bf9c192a29718c249087e0f809ee6991da7e989143d40dcf701db55353af2ef",
-          "ENV:NETRC \\0"
+          "REPO_MAPPING:kmp+,bazel_tools bazel_tools"
         ],
         "generatedRepoSpecs": {
           "io_ktor-ktor-client-cio-wasm-js-3_4_3-sources_http": {
@@ -695,7 +692,7 @@
     },
     "@@kmp+//kmp:extensions.bzl%resolver": {
       "general": {
-        "bzlTransitiveDigest": "b5CqxO7EjSQVlG3Hz+sezE/fwf/6kte/ta6w8wZNqcw=",
+        "bzlTransitiveDigest": "IEN9QTWo2QIi1PPT+HIyXivi31RaFHOEMtn4b8nynOE=",
         "usagesDigest": "OpgEd7GBNeSbe6OydGG9AjRAcEYVEqp8jYgI+S0p4no=",
         "recordedInputs": [
           "REPO_MAPPING:kmp+,bazel_tools bazel_tools"
