@@ -8,6 +8,8 @@ package(default_visibility = ["//visibility:public"])
 RESOLVER_DEPS = [
     artifact("com.github.ajalt.clikt:clikt-jvm", "resolver_maven"),
     artifact("com.jetbrains.intellij.platform:jps-model", "resolver_maven"),
+    artifact("io.ktor:ktor-client-cio-jvm", "resolver_maven"),
+    artifact("io.ktor:ktor-client-core-jvm", "resolver_maven"),
     artifact("org.jetbrains.amper:dependency-resolution", "resolver_maven"),
     artifact("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm", "resolver_maven"),
     artifact("org.jetbrains.kotlinx:kotlinx-serialization-core-jvm", "resolver_maven"),
@@ -27,6 +29,7 @@ kt_compiler_plugin(
 kt_jvm_library(
     name = "resolver_lib",
     srcs = [
+        "src/org/jetbrains/kmp/resolver/ArtifactUrlResolver.kt",
         "src/org/jetbrains/kmp/resolver/AuthenticationHelpers.kt",
         "src/org/jetbrains/kmp/resolver/MultiplatformResolver.kt",
         "src/org/jetbrains/kmp/resolver/ResolveCommand.kt",
@@ -38,7 +41,6 @@ kt_jvm_library(
 
 java_binary(
     name = "resolver",
-    jvm_flags = ["--add-modules=java.net.http"],
     main_class = "org.jetbrains.kmp.resolver.MainKt",
     runtime_deps = [":resolver_lib"],
 )

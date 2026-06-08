@@ -47,7 +47,7 @@ class ResolveCommand : SuspendingCliktCommand("resolver") {
         val manifest = BazelManifest(
             askedCoordinates = coordinates.sorted(),
             askedRepositories = repositories.sorted(),
-            libraries = resolver.resolveMultiplatformComponentsOf(coordinates).associateBy { it.id },
+            libraries = resolver.resolveMultiplatformComponentsOf(coordinates).associateBy { it.id }.toSortedMap(),
         )
         outputManifest.createParentDirectories()
         outputManifest.outputStream().use { output ->
