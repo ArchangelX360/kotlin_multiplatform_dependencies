@@ -29,7 +29,7 @@ class ResolveCommand : SuspendingCliktCommand("resolver") {
         help = "Maven repository URL, can be specified multiple times for resolving against many repositories.",
     ).multiple(required = true)
 
-    private val repositoryCredentialsFile by option(
+    private val repositoryCredentialsFile: Path? by option(
         "--repository-credentials-file",
         help = "Path to JSON repository credentials resolved by the caller.",
     ).convert { Path.of(it) }

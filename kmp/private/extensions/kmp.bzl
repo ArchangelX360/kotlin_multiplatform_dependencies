@@ -7,7 +7,7 @@ _DEFAULT_REPOSITORIES = [
 
 _NETRC_ENV = "NETRC"
 _REPOSITORY_CREDENTIALS_FILE = "repository-credentials.json"
-_RESOLUTION_FACTS_VERSION = "resolution.v16"
+_RESOLUTION_FACTS_VERSION = "resolution.v17"
 _RESOLVER_REPOSITORY_NAME = "kmp_resolver"
 _RESOLVER_LABEL = "@%s//:resolver" % _RESOLVER_REPOSITORY_NAME
 _RESOLVER_VERSION = "0.0.1"
@@ -53,13 +53,18 @@ def _materialize_resolution(resolution):
             "exported_deps": _dependency_labels(library, "exportedDependencies", target_names),
         })
 
-    return materialized_targets
+    return struct(
+        aliases = _library_aliases(libraries, target_names),
+        targets = materialized_targets,
+    )
 
 def _validated_library(library_id, library):
     if type(library) != "dict":
         fail("Unexpected library entry for %s: expected dict, got %s." % (library_id, type(library)))
 
-    declared_id = library.get("id", library_id)
+    declared_id = library.get("id")
+    if type(declared_id) != "string" or not declared_id:
+        fail("Library entry for %s is missing id." % library_id)
     if declared_id != library_id:
         fail("Library key does not match library id: key=%s id=%s" % (library_id, declared_id))
 
@@ -81,7 +86,9 @@ def _library_target_names(libraries):
     target_names = {}
     used_names = {}
     for library_id in sorted(libraries.keys()):
-        target_name = _build_target_name(library_id)
+        library = _validated_library(library_id, libraries[library_id])
+        variant_id = _library_variant_id(library_id, library)
+        target_name = _build_target_name(variant_id)
         if target_name in used_names:
             fail("Library target name collision for '%s' and '%s': %s" % (
                 used_names[target_name],
@@ -90,7 +97,65 @@ def _library_target_names(libraries):
             ))
         used_names[target_name] = library_id
         target_names[library_id] = target_name
+        target_names[variant_id] = target_name
     return target_names
+
+def _library_aliases(libraries, target_names):
+    real_names = {}
+    for target_name in target_names.values():
+        real_names[target_name] = True
+
+    aliases = {}
+    for library_id in sorted(libraries.keys()):
+        library = _validated_library(library_id, libraries[library_id])
+        variant_id = _library_variant_id(library_id, library)
+        target_name = target_names[library_id]
+
+        _add_alias(aliases, real_names, _versionless_target_name(variant_id), target_name, variant_id)
+
+        if library_id != variant_id:
+            _add_alias(aliases, real_names, _build_target_name(library_id), target_name, library_id)
+            _add_alias(aliases, real_names, _versionless_target_name(library_id), target_name, library_id)
+
+    return [
+        {
+            "actual": ":%s" % aliases[name],
+            "name": name,
+        }
+        for name in sorted(aliases.keys())
+    ]
+
+def _add_alias(aliases, real_names, alias_name, target_name, coordinate):
+    if alias_name == target_name:
+        return
+    if alias_name in real_names:
+        fail("Alias target name for %s collides with a real generated target: %s" % (coordinate, alias_name))
+
+    existing = aliases.get(alias_name)
+    if existing != None and existing != target_name:
+        fail("Alias target name for %s is ambiguous: %s points to both %s and %s" % (
+            coordinate,
+            alias_name,
+            existing,
+            target_name,
+        ))
+    aliases[alias_name] = target_name
+
+def _library_variant_id(library_id, library):
+    variant_id = library.get("variantId")
+    if type(variant_id) != "string" or not variant_id:
+        fail("Library %s is missing variantId." % library_id)
+    return variant_id
+
+def _versionless_target_name(coordinate):
+    parts = _maven_coordinate_parts(coordinate)
+    return _build_target_name("%s:%s" % (parts[0], parts[1]))
+
+def _maven_coordinate_parts(coordinate):
+    parts = coordinate.split(":")
+    if len(parts) != 3 or not parts[0] or not parts[1] or not parts[2]:
+        fail("Expected Maven coordinate group:artifact:version, got: %s" % coordinate)
+    return parts
 
 def _dependency_labels(library, field, target_names):
     labels = []
@@ -205,13 +270,15 @@ def _dedupe(items):
         result.append(item)
     return result
 
-def _render_build_file(targets):
+def _render_build_file(materialized):
     return "\n".join([
         "load(\"@kmp//kmp:wasmjs.bzl\", \"kmp_wasmjs_import\")",
         "",
         "package(default_visibility = [\"//visibility:public\"])",
         "",
-        _render_targets_block(targets),
+        _render_targets_block(materialized.targets),
+        "",
+        _render_aliases_block(materialized.aliases),
         "",
     ])
 
@@ -223,6 +290,17 @@ def _render_targets_block(targets):
         ]
         lines.extend(_render_wasmjs_import(target))
         blocks.append("\n".join(lines))
+    return "\n\n".join(blocks)
+
+def _render_aliases_block(aliases):
+    blocks = []
+    for alias in aliases:
+        blocks.append("\n".join([
+            "alias(",
+            "    name = %s," % _quote(alias["name"]),
+            "    actual = %s," % _quote(alias["actual"]),
+            ")",
+        ]))
     return "\n\n".join(blocks)
 
 def _render_wasmjs_import(target):

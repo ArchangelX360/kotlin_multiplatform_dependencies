@@ -14,6 +14,8 @@ build_test(
     name = "smoke_test",
     targets = [
         ":hello",
+        "@kmp_deps//:io_ktor_ktor_client_core",
         "@kmp_deps//:io_ktor_ktor_client_core_wasm_js_3_4_3",
+        "@kmp_deps//:org_jetbrains_kotlin_kotlin_stdlib",
     ],
 )

@@ -140,11 +140,19 @@ internal class MultiplatformResolver(
                                                 )
                                             }
                                             val existing = resolved[node.idForBazel] ?: resolved[actualNode.idForBazel]
-                                            val updated = existing?.copy(
-                                                dependencies = existing.dependencies + runtimeDeps.asBazelIds(),
-                                                exportedDependencies = existing.exportedDependencies + compileDeps.asBazelIds(),
-                                            )
-                                            resolved[node.idForBazel] = updated ?: initial // TODO: when supporting other targets than WasmJS, we may want the umbrella ID not to be considered the same as the variant ID
+                                            val updated = existing?.let {
+                                                val exportedDeps =
+                                                    (existing.exportedDependencies + compileDeps.asBazelIds()).toSet()
+                                                val deps = (existing.dependencies + runtimeDeps.asBazelIds()).toSet()
+                                                    .minus(exportedDeps)
+                                                it.copy(
+                                                    dependencies = deps.sorted(),
+                                                    exportedDependencies = exportedDeps.sorted(),
+                                                )
+                                            }
+
+                                            // TODO: when supporting other targets than WasmJS, we may want the umbrella ID not to be considered the same as the variant ID
+                                            // resolved[node.idForBazel] = updated ?: initial
                                             resolved[actualNode.idForBazel] = updated ?: initial
                                         }
 
