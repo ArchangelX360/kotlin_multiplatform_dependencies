@@ -4,8 +4,59 @@ import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
 import io.ktor.http.*
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import org.jetbrains.amper.dependency.resolution.MavenRepository
 import java.util.concurrent.ConcurrentHashMap
+
+internal data class UnresolvedMultiplatformLibraryArtifact(
+    val sha256checksum: String?,
+    val groupId: String,
+    val artifactId: String,
+    val version: String,
+    val artifactPath: String,
+)
+
+internal data class UnresolvedNode(
+    val id: MultiplatformLibraryId,
+    val variantId: MultiplatformLibraryId,
+    val klib: UnresolvedMultiplatformLibraryArtifact,
+    val sourceJar: UnresolvedMultiplatformLibraryArtifact?,
+    val dependencies: List<MultiplatformLibraryId>,
+    val exportedDependencies: List<MultiplatformLibraryId>,
+)
+
+internal suspend fun UnresolvedMultiplatformLibraryArtifact.resolve(
+    repositories: List<MavenRepository>,
+    artifactUrlResolver: ArtifactUrlResolver,
+): MultiplatformLibraryArtifact = coroutineScope {
+    MultiplatformLibraryArtifact(
+        sha256checksum = sha256checksum,
+        groupId = groupId,
+        artifactId = artifactId,
+        version = version,
+        urls = repositories.map {
+            async {
+                artifactUrlResolver.artifactExistsAt(it, artifactPath)
+            }
+        }.awaitAll().filterIsInstance<ArtifactFile.Resolved>().map { it.url },
+    )
+}
+
+internal suspend fun UnresolvedNode.resolve(
+    repositories: List<MavenRepository>,
+    artifactUrlResolver: ArtifactUrlResolver,
+): MultiplatformLibrary = coroutineScope {
+    MultiplatformLibrary(
+        id = id,
+        variantId = variantId,
+        klib = klib.resolve(repositories, artifactUrlResolver),
+        sourceJar = sourceJar?.resolve(repositories, artifactUrlResolver),
+        dependencies = dependencies,
+        exportedDependencies = exportedDependencies,
+    )
+}
 
 internal sealed class ArtifactFile {
     data class Resolved(val url: String) : ArtifactFile()
@@ -19,7 +70,7 @@ internal class ArtifactUrlResolver : AutoCloseable {
     }
     private val availabilityByUrl = ConcurrentHashMap<String, ArtifactFile>()
 
-    private suspend fun artifactExistsAt(repository: MavenRepository, artifactPath: String): ArtifactFile {
+    suspend fun artifactExistsAt(repository: MavenRepository, artifactPath: String): ArtifactFile {
         val artifactUrl = "${repository.url.trimEnd('/')}/$artifactPath"
         return availabilityByUrl.getOrPut(artifactUrl) {
             val resolved = httpClient.head {

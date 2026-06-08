@@ -54,9 +54,20 @@ internal class MultiplatformResolver(
     private val amperCachePath: Path = cachePath.resolve("amper-cache")
 
     internal suspend fun resolveMultiplatformComponentsOf(coordinatesBag: Collection<String>): List<MultiplatformLibrary> {
+        val nodes = resolveNodes(coordinatesBag)
+        return ArtifactUrlResolver().use { artifactUrlResolver ->
+            coroutineScope {
+                nodes.values.map { unresolvedNode ->
+                    async { unresolvedNode.resolve(repositories, artifactUrlResolver) }
+                }.awaitAll()
+            }
+        }
+    }
+
+    private suspend fun resolveNodes(coordinatesBag: Collection<String>): Map<String, UnresolvedNode> {
         val platforms = setOf(ResolutionPlatform.WASM_JS)
         val defaultSettings: SettingsBuilder.() -> Unit = {
-            this.platforms = setOf(ResolutionPlatform.WASM_JS)
+            this.platforms = platforms
             repositories = this@MultiplatformResolver.repositories
             cache = getDefaultFileCacheBuilder(amperCachePath)
         }
@@ -87,92 +98,74 @@ internal class MultiplatformResolver(
         val errors = root.resolutionErrors()
         return when {
             errors.isEmpty() -> {
-                val resolved = mutableMapOf<String, MultiplatformLibrary>()
+                val resolved = mutableMapOf<String, UnresolvedNode>()
                 val visited = mutableSetOf<MavenDependencyNode>()
                 val queue = ArrayDeque<MavenDependencyNode>()
                 queue.addAll(root.children.filterIsInstance<MavenDependencyNode>())
-                ArtifactUrlResolver().use { artifactUrlResolver ->
-                    while (queue.isNotEmpty()) {
-                        val node = queue.removeFirstOrNull()
+                while (queue.isNotEmpty()) {
+                    val node = queue.removeFirstOrNull()
 
-                        when {
-                            node == null -> {}
-                            visited.contains(node) -> {}
-                            else -> {
-                                visited.add(node)
-                                val errors = node.resolutionErrors()
-                                when {
-                                    errors.isNotEmpty() -> {
-                                        // TODO: throw probably?
-                                        println(buildString {
-                                            appendLine("WARN: resolution errors for node: ${node.idForBazel}")
-                                            errors.forEach { appendLine("- ${it.detailedMessage}") }
-                                        })
+                    when {
+                        node == null -> {}
+                        visited.contains(node) -> {}
+                        else -> {
+                            visited.add(node)
+                            val errors = node.resolutionErrors()
+                            when {
+                                errors.isNotEmpty() -> {
+                                    // TODO: throw probably?
+                                    println(buildString {
+                                        appendLine("WARN: resolution errors for node: ${node.idForBazel}")
+                                        errors.forEach { appendLine("- ${it.detailedMessage}") }
+                                    })
+                                }
+
+                                else -> {
+                                    val actualNode = node.actualWasmJsMavenDependency()
+                                    val children = actualNode.children.filterIsInstance<MavenDependencyNode>()
+                                    queue.addAll(children)
+
+                                    val klibs = actualNode.filesMatching { it.klib() }
+                                    val klib = klibs.singleOrNull()
+                                        ?: error("Expected exactly one klib for dependency ${node.idForBazel}, got: $klibs")
+
+                                    val sourceJars = actualNode.filesMatching { it.sourceJar() }
+                                    require(sourceJars.size <= 1) { "Expected at most one source jar, found ${sourceJars.size}: $sourceJars" }
+                                    val sourceJar = sourceJars.singleOrNull()
+
+                                    val (runtimeDeps, compileDeps) = children.partition {
+                                        it.dependency.resolutionConfig.scope == ResolutionScope.RUNTIME
                                     }
 
-                                    else -> {
-                                        val actualNode = node.actualWasmJsMavenDependency()
-                                        val children = actualNode.children.filterIsInstance<MavenDependencyNode>()
-                                        queue.addAll(children)
-
-                                        val actualChildren = children.map { it.actualWasmJsMavenDependency() }
-
-                                        val klibs =
-                                            actualNode.filesMatching(repositories, artifactUrlResolver) { it.klib() }
-                                        when (klibs.size) {
-                                            0 -> {}
-                                            1 -> {
-                                                val klib = klibs.singleOrNull()
-                                                    ?: error("Expected exactly one klib for dependency ${actualNode.idForBazel}, got: ${klibs}")
-
-                                                val sourceJars = actualNode.filesMatching(
-                                                    repositories, artifactUrlResolver
-                                                ) { it.sourceJar() }
-                                                require(sourceJars.size <= 1) { "Expected at most one source jar, found ${sourceJars.size}: $sourceJars" }
-                                                val sourceJar = sourceJars.singleOrNull()
-
-                                                val (runtimeDeps, compileDeps) = actualChildren.partition {
-                                                    it.dependency.resolutionConfig.scope == ResolutionScope.RUNTIME
-                                                }
-                                                val initial by lazy {
-                                                    MultiplatformLibrary(
-                                                        id = node.idForBazel,
-                                                        variantId = actualNode.idForBazel,
-                                                        klib = klib,
-                                                        sourceJar = sourceJar,
-                                                        dependencies = runtimeDeps.asBazelIds(),
-                                                        exportedDependencies = compileDeps.asBazelIds(),
-                                                    )
-                                                }
-                                                val existing =
-                                                    resolved[node.idForBazel] ?: resolved[actualNode.idForBazel]
-                                                val updated = existing?.let {
-                                                    val exportedDeps =
-                                                        (existing.exportedDependencies + compileDeps.asBazelIds()).toSet()
-                                                    val deps =
-                                                        (existing.dependencies + runtimeDeps.asBazelIds()).toSet()
-                                                            .minus(exportedDeps)
-                                                    it.copy(
-                                                        dependencies = deps.sorted(),
-                                                        exportedDependencies = exportedDeps.sorted(),
-                                                    )
-                                                }
-
-                                                // TODO: when supporting other targets than WasmJS, we may want the umbrella ID not to be considered the same as the variant ID
-                                                // resolved[node.idForBazel] = updated ?: initial
-                                                resolved[actualNode.idForBazel] = updated ?: initial
-                                            }
-
-                                            else -> error("expected at most one klib for dependency ${actualNode.idForBazel}, got: $klibs")
-                                        }
+                                    val initial by lazy {
+                                        UnresolvedNode(
+                                            id = node.idForBazel,
+                                            variantId = actualNode.idForBazel,
+                                            klib = klib,
+                                            sourceJar = sourceJar,
+                                            dependencies = runtimeDeps.asBazelIds(),
+                                            exportedDependencies = compileDeps.asBazelIds(),
+                                        )
                                     }
+                                    val existing = resolved[actualNode.idForBazel]
+                                    val updated = existing?.let {
+                                        val exportedDeps =
+                                            (existing.exportedDependencies + compileDeps.asBazelIds()).toSet()
+                                        val deps = (existing.dependencies + runtimeDeps.asBazelIds()).toSet()
+                                            .minus(exportedDeps)
+                                        it.copy(
+                                            dependencies = deps.sorted(),
+                                            exportedDependencies = exportedDeps.sorted(),
+                                        )
+                                    }
+
+                                    resolved[actualNode.idForBazel] = updated ?: initial
                                 }
                             }
                         }
                     }
                 }
-
-                resolved.values.sortedBy { it.id }
+                resolved
             }
 
             else -> {
@@ -223,36 +216,23 @@ private suspend fun MavenDependencyNode.actualMavenDependencyOfVariantsMatching(
 }
 
 @Suppress("INVISIBLE_REFERENCE")
-private suspend fun MavenDependencyNode.filesMatching(
-    repositories: List<MavenRepository>,
-    artifactUrlResolver: ArtifactUrlResolver,
-    attributeMatcher: (Map<String, String>) -> Boolean,
-): List<MultiplatformLibraryArtifact> {
-    val dependency = this.dependency as MavenDependencyImpl
-    val files = dependency.variants.filter { variant ->
+private suspend fun MavenDependencyNode.filesMatching(attributeMatcher: (Map<String, String>) -> Boolean): List<UnresolvedMultiplatformLibraryArtifact> =
+    (this.dependency as MavenDependencyImpl).variants.filter { variant ->
         attributeMatcher(variant.attributes)
-    }.flatMap { variant -> variant.files }
-    return coroutineScope {
-        files.map { file ->
-            async {
-                val version = resolvedVersion() ?: error("could not resolve version for dependency: $dependency")
+    }.flatMap { variant -> variant.files }.map { file ->
+        val version = resolvedVersion() ?: error("could not resolve version for dependency: $dependency")
 
-                val groupPath = group.split('.').joinToString("/")
-                val artifactPath = "${groupPath}/${module}/${version}/${file.url.removePrefix("./")}"
+        val groupPath = group.split('.').joinToString("/")
+        val artifactPath = "${groupPath}/${module}/${version}/${file.url.removePrefix("./")}"
 
-                MultiplatformLibraryArtifact(
-                    sha256checksum = file.sha256,
-                    groupId = group,
-                    artifactId = module,
-                    version = version,
-                    urls = repositories.map {
-                        artifactUrlResolver.artifactExistsAt(it, artifactPath)
-                    }.filterIsInstance<ArtifactFile.Resolved>().map { it.url },
-                )
-            }
-        }.awaitAll()
+        UnresolvedMultiplatformLibraryArtifact(
+            sha256checksum = file.sha256,
+            groupId = group,
+            artifactId = module,
+            version = version,
+            artifactPath = artifactPath,
+        )
     }
-}
 
 private fun String.toMavenNode(context: Context): MavenDependencyNodeWithContext {
     val isBom = startsWith("bom:")
