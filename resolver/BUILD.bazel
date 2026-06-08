@@ -15,6 +15,7 @@ RESOLVER_DEPS = [
     artifact("org.jetbrains.kotlinx:kotlinx-serialization-core-jvm", "resolver_maven"),
     artifact("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm", "resolver_maven"),
     artifact("ch.qos.logback:logback-core", "resolver_maven"),
+    artifact("ch.qos.logback:logback-classic", "resolver_maven"),
     artifact("org.slf4j:slf4j-api", "resolver_maven"),
 ]
 
