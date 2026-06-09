@@ -9,4 +9,3 @@ load(
 )
 
 kmp = _kmp
-resolver = _resolver

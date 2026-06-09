@@ -267,7 +267,7 @@
   "moduleExtensions": {
     "@@kmp+//kmp:extensions.bzl%kmp": {
       "general": {
-        "bzlTransitiveDigest": "NaJvTxs8gn2mv92EJRoJ+QGdmIw4mWBQB11ryzu/u38=",
+        "bzlTransitiveDigest": "IRHNfPS8LZwQK3PLJYR9lX3lU6h84oHaExqPU3BROkg=",
         "usagesDigest": "W/iyuDZwgOQ1ckRMT5s+JpjTKmrdda/02d4siBoVhRA=",
         "recordedInputs": [
           "REPO_MAPPING:kmp+,bazel_tools bazel_tools"
@@ -687,26 +687,6 @@
           "explicitRootModuleDirectDevDeps": [],
           "useAllRepos": "NO",
           "reproducible": false
-        }
-      }
-    },
-    "@@kmp+//kmp:extensions.bzl%resolver": {
-      "general": {
-        "bzlTransitiveDigest": "NaJvTxs8gn2mv92EJRoJ+QGdmIw4mWBQB11ryzu/u38=",
-        "usagesDigest": "GUSmJPVpVjbLyuV2pKXj8WTr7VoYE/hbsJgCf8BWjHw=",
-        "recordedInputs": [
-          "REPO_MAPPING:kmp+,bazel_tools bazel_tools"
-        ],
-        "generatedRepoSpecs": {
-          "kmp_resolver": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
-              "urls": [
-                "https://github.com/ArchangelX360/kotlin_multiplatform_dependencies/releases/download/resolver-v0.0.1/kmp-resolver-0.0.1.tar.gz"
-              ]
-            }
-          }
         }
       }
     },

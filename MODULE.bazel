@@ -41,9 +41,3 @@ maven.install(
     ],
 )
 use_repo(maven, "resolver_maven")
-
-resolver_extension = use_extension("//kmp:extensions.bzl", "resolver")
-use_repo(resolver_extension, "kmp_resolver")
-
-# kmp_extension = use_extension("//kmp:extensions.bzl", "kmp")
-# use_repo(kmp_extension, "kmp_deps")
