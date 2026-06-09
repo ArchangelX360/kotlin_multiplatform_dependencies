@@ -8,20 +8,6 @@ local_path_override(
     path = "../..",
 )
 
-local_repository = use_repo_rule("@bazel_tools//tools/build_defs/repo:local.bzl", "local_repository")
-
-local_repository(
-    name = "local_kmp_resolver",
-    path = "../../resolver/local_repository",
-)
-
-resolver_extension = use_extension("@kmp//kmp:extensions.bzl", "resolver")
-
-override_repo(
-    resolver_extension,
-    kmp_resolver = "local_kmp_resolver",
-)
-
 kmp_extension = use_extension("@kmp//kmp:extensions.bzl", "kmp")
 kmp_extension.configure(
     deps = [

@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-repository_root="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-exec "${repository_root}/bazel-bin/resolver/resolver" "$@"

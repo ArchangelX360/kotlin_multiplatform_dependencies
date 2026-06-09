@@ -267,7 +267,7 @@
   "moduleExtensions": {
     "@@kmp+//kmp:extensions.bzl%kmp": {
       "general": {
-        "bzlTransitiveDigest": "+NzZBDmIaotXvxi4SJB+X/WiaKvnBq4NG+hRXRabWSA=",
+        "bzlTransitiveDigest": "NaJvTxs8gn2mv92EJRoJ+QGdmIw4mWBQB11ryzu/u38=",
         "usagesDigest": "W/iyuDZwgOQ1ckRMT5s+JpjTKmrdda/02d4siBoVhRA=",
         "recordedInputs": [
           "REPO_MAPPING:kmp+,bazel_tools bazel_tools"
@@ -692,8 +692,8 @@
     },
     "@@kmp+//kmp:extensions.bzl%resolver": {
       "general": {
-        "bzlTransitiveDigest": "+NzZBDmIaotXvxi4SJB+X/WiaKvnBq4NG+hRXRabWSA=",
-        "usagesDigest": "OpgEd7GBNeSbe6OydGG9AjRAcEYVEqp8jYgI+S0p4no=",
+        "bzlTransitiveDigest": "NaJvTxs8gn2mv92EJRoJ+QGdmIw4mWBQB11ryzu/u38=",
+        "usagesDigest": "GUSmJPVpVjbLyuV2pKXj8WTr7VoYE/hbsJgCf8BWjHw=",
         "recordedInputs": [
           "REPO_MAPPING:kmp+,bazel_tools bazel_tools"
         ],
