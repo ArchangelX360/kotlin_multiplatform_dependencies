@@ -5,16 +5,8 @@ _DEFAULT_REPOSITORIES = [
     "https://repo1.maven.org/maven2",
 ]
 
-_NETRC_ENV = "NETRC"
-_REPOSITORY_CREDENTIALS_FILE = "repository-credentials.json"
 _RESOLUTION_FACTS_VERSION = "resolution.v17"
-_RESOLVER_REPOSITORY_NAME = "kmp_resolver"
 _RESOLVER_LABEL = "//resolver:resolver"
-_RESOLVER_VERSION = "0.0.1"
-_RESOLVER_SHA256 = "0000000000000000000000000000000000000000000000000000000000000000"
-_RESOLVER_URLS = [
-    "https://github.com/ArchangelX360/kotlin_multiplatform_dependencies/releases/download/resolver-v%s/kmp-resolver-%s.tar.gz" % (_RESOLVER_VERSION, _RESOLVER_VERSION),
-]
 
 _EMPTY_RESOLUTION_JSON = json.encode({
     "askedCoordinates": [],
@@ -395,8 +387,9 @@ def _resolve_fresh(module_ctx, config):
 
     repository_credentials = _repository_credentials(module_ctx, config.repositories)
     if repository_credentials:
-        module_ctx.file(_REPOSITORY_CREDENTIALS_FILE, json.encode(repository_credentials), executable = False)
-        args.extend(["--repository-credentials-file", module_ctx.path(_REPOSITORY_CREDENTIALS_FILE)])
+        credentials_file = "repository-credentials.json"
+        module_ctx.file(credentials_file, json.encode(repository_credentials), executable = False)
+        args.extend(["--repository-credentials-file", module_ctx.path(credentials_file)])
 
     print("running resolution with %s" % args)
 
@@ -442,7 +435,7 @@ def _auth_context(module_ctx):
     return struct(
         attr = struct(
             auth_patterns = {},
-            netrc = module_ctx.getenv(_NETRC_ENV) or "",
+            netrc = module_ctx.getenv("NETRC") or "",
         ),
         os = module_ctx.os,
         path = module_ctx.path,
@@ -507,13 +500,6 @@ def _kmp_extension_impl(module_ctx):
             facts = facts,
         )
 
-def _resolver_extension_impl(module_ctx):
-    http_archive(
-        name = _RESOLVER_REPOSITORY_NAME,
-        sha256 = _RESOLVER_SHA256,
-        urls = _RESOLVER_URLS,
-    )
-
 kmp = module_extension(
     implementation = _kmp_extension_impl,
     tag_classes = {
@@ -529,9 +515,4 @@ kmp = module_extension(
         }),
     },
     doc = "Kotlin Multiplatform dependency extension.",
-)
-
-resolver = module_extension(
-    implementation = _resolver_extension_impl,
-    doc = "Provides the private resolver executable repository used by the kmp extension.",
 )
