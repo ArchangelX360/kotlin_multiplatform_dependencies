@@ -88,18 +88,27 @@ internal class MultiplatformResolver(
             scope = ResolutionScope.COMPILE
         }
         val root = RootDependencyNodeWithContext(
-            graphEntryName = "root",
-            children = coordinatesBag.map { c -> c.toMavenNode(runtimeContext) } + coordinatesBag.map { c ->
-                c.toMavenNode(compileContext)
-            },
-            rootCacheEntryKey = RootCacheEntryKey.Key(
-                CacheEntryKey.CompositeCacheEntryKey(
-                    coordinatesBag.toList() + repositories + platforms,
-                )
-            ),
             templateContext = templateContext,
+            children = coordinatesBag.flatMap { c ->
+                listOf(
+                    c.toMavenNode(runtimeContext),
+                    c.toMavenNode(compileContext),
+                )
+            },
         )
-        Resolver().resolveDependencies(root = root, resolutionLevel = ResolutionLevel.NETWORK, transitive = true)
+
+        val resolver = Resolver()
+        resolver.resolveDependencies(
+            root = root,
+            resolutionLevel = ResolutionLevel.NETWORK,
+            transitive = true,
+            incrementalCacheUsage = IncrementalCacheUsage.SKIP,
+            unspecifiedVersionResolver = MavenDependencyUnspecifiedVersionResolverBase(),
+        )
+        resolver.downloadDependencies(
+            node = root,
+            downloadSources = false,
+        )
 
         var errored = false
 
@@ -107,7 +116,7 @@ internal class MultiplatformResolver(
         if (errors.isNotEmpty()) {
             errored = true
             logger.error(buildString {
-                appendLine("resolution errors for root node")
+                appendLine("[root] resolution errors:")
                 errors.forEach { appendLine("- ${it.detailedMessage}") }
             })
         }
@@ -129,21 +138,25 @@ internal class MultiplatformResolver(
                         errors.isNotEmpty() -> {
                             errored = true
                             logger.error(buildString {
-                                appendLine("resolution errors for node: ${node.idForBazel}")
+                                appendLine("[${node.idForBazel}] resolution errors:")
                                 errors.forEach { appendLine("- ${it.detailedMessage}") }
                             })
                         }
 
                         else -> {
-                            val actualNode = node.actualWasmJsMavenDependency()
+                            logger.info("[${node.idForBazel}] Processing node")
+                            val actualNode = node.actualMavenDependencyOfVariantsMatching { it.klib() }
+                            logger.info("[${node.idForBazel}] resolved to ${actualNode.idForBazel}")
                             val children = actualNode.children.filterIsInstance<MavenDependencyNode>()
                             queue.addAll(children)
 
-                            val klibs = actualNode.filesMatching { it.klib() }
+                            val klibs = actualNode.filesMatching(logger) { it.klib() }
+                            logger.info("[${actualNode.idForBazel}] found klibs: $klibs")
                             val klib = klibs.singleOrNull()
-                                ?: error("Expected exactly one klib for dependency ${node.idForBazel}, got: $klibs")
+                                ?: error("Expected exactly one klib for dependency ${actualNode.idForBazel}, got: $klibs")
 
-                            val sourceJars = actualNode.filesMatching { it.sourceJar() }
+                            val sourceJars = actualNode.filesMatching(logger) { it.sourceJar() }
+                            logger.info("[${actualNode.idForBazel}] found sourceJars: $sourceJars")
                             require(sourceJars.size <= 1) { "Expected at most one source jar, found ${sourceJars.size}: $sourceJars" }
                             val sourceJar = sourceJars.singleOrNull()
 
@@ -163,10 +176,9 @@ internal class MultiplatformResolver(
                             }
                             val existing = resolved[actualNode.idForBazel]
                             val updated = existing?.let {
-                                val exportedDeps =
-                                    (existing.exportedDependencies + compileDeps.asBazelIds()).toSet()
-                                val deps = (existing.dependencies + runtimeDeps.asBazelIds()).toSet()
-                                    .minus(exportedDeps)
+                                val exportedDeps = (existing.exportedDependencies + compileDeps.asBazelIds()).toSet()
+                                val deps =
+                                    (existing.dependencies + runtimeDeps.asBazelIds()).toSet().minus(exportedDeps)
                                 it.copy(
                                     dependencies = deps.sorted(),
                                     exportedDependencies = exportedDeps.sorted(),
@@ -192,9 +204,6 @@ private fun List<MavenDependencyNode>.asBazelIds() = map { it.idForBazel }.sorte
 
 private val MavenDependencyNode.idForBazel get() = "$group:$module:${resolvedVersion().orUnspecified()}"
 
-private suspend fun MavenDependencyNode.actualWasmJsMavenDependency(): MavenDependencyNode =
-    actualMavenDependencyOfVariantsMatching { it.klib() || it.sourceJar() }
-
 private fun DependencyNode.resolutionErrors(): List<Message> = messages.filter { it.severity >= Severity.ERROR }
 
 private fun Map<String, String>.sourceJar(): Boolean {
@@ -210,10 +219,14 @@ private fun Map<String, String>.klib(): Boolean {
 @Suppress("INVISIBLE_REFERENCE")
 private suspend fun MavenDependencyNode.actualMavenDependencyOfVariantsMatching(attributeMatcher: (Map<String, String>) -> Boolean): MavenDependencyNode {
     val originalDep = this.dependency as MavenDependencyImpl
+    require(originalDep.variants.isNotEmpty()) {
+        error("no variants found for dependency $idForBazel")
+    }
     val availableAts = originalDep.variants.filter { attributeMatcher(it.attributes) }.map { it.`available-at` }.toSet()
     return when {
+        availableAts.isEmpty() -> error("no variants matched the attribute matcher")
+        availableAts.size > 1 -> error("all matched variants must point to the same Maven dependency, but got: ${originalDep.variants}")
         availableAts.all { it == null } -> this // no variant indirection, it means that dependency is the actual one we need to consider
-        availableAts.singleOrNull() == null -> error("all matched variants must point to the same Maven dependency, but got: ${originalDep.variants}")
         else -> { // all variants are pointing to the same Maven dependency, e.g. the `-wasm-js` one, that's the one we must consider here
             val availableAt = availableAts.single()
             children.filterIsInstance<MavenDependencyNode>().first {
@@ -224,8 +237,17 @@ private suspend fun MavenDependencyNode.actualMavenDependencyOfVariantsMatching(
 }
 
 @Suppress("INVISIBLE_REFERENCE")
-private suspend fun MavenDependencyNode.filesMatching(attributeMatcher: (Map<String, String>) -> Boolean): List<UnresolvedMultiplatformLibraryArtifact> =
-    (this.dependency as MavenDependencyImpl).variants.filter { variant ->
+private suspend fun MavenDependencyNode.filesMatching(
+    logger: Logger,
+    attributeMatcher: (Map<String, String>) -> Boolean
+): List<UnresolvedMultiplatformLibraryArtifact> {
+    logger.info("${idForBazel}: considering variants")
+    val dep = this.dependency as MavenDependencyImpl
+    require(dep.variants.isNotEmpty()) {
+        error("no variants found for dependency $idForBazel")
+    }
+    return dep.variants.filter { variant ->
+        logger.info("${idForBazel}: considering variant with attributes -> ${variant.attributes}")
         attributeMatcher(variant.attributes)
     }.flatMap { variant -> variant.files }.map { file ->
         val version = resolvedVersion() ?: error("could not resolve version for dependency: $dependency")
@@ -241,6 +263,7 @@ private suspend fun MavenDependencyNode.filesMatching(attributeMatcher: (Map<Str
             artifactPath = artifactPath,
         )
     }
+}
 
 private fun String.toMavenNode(context: Context): MavenDependencyNodeWithContext {
     val isBom = startsWith("bom:")

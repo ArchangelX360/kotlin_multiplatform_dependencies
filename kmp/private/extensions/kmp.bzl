@@ -398,9 +398,11 @@ def _resolve_fresh(module_ctx, config):
         module_ctx.file(_REPOSITORY_CREDENTIALS_FILE, json.encode(repository_credentials), executable = False)
         args.extend(["--repository-credentials-file", module_ctx.path(_REPOSITORY_CREDENTIALS_FILE)])
 
+    print("running resolution with %s" % args)
+
     result = module_ctx.execute(
         args,
-        quiet = True,
+        quiet = False,
         timeout = 600,
     )
     if result.return_code:
