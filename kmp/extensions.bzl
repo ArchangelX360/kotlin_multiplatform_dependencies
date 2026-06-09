@@ -6,7 +6,6 @@ Exposes in repositories Kotlin Multiplatform dependencies resolved against Maven
 load(
     "//kmp/private/extensions:kmp.bzl",
     _kmp = "kmp",
-    _resolver = "resolver",
 )
 
 kmp = _kmp
