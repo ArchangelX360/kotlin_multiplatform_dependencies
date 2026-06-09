@@ -11,6 +11,7 @@ import org.jetbrains.amper.dependency.resolution.diagnostics.detailedMessage
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.nio.file.Path
+import kotlin.io.path.name
 
 internal typealias MultiplatformLibraryId = String
 
@@ -147,45 +148,56 @@ internal class MultiplatformResolver(
                             logger.info("[${node.idForBazel}] Processing node")
                             val actualNode = node.actualMavenDependencyOfVariantsMatching { it.klib() }
                             logger.info("[${node.idForBazel}] resolved to ${actualNode.idForBazel}")
-                            val children = actualNode.children.filterIsInstance<MavenDependencyNode>()
-                            queue.addAll(children)
+                            when {
+                                actualNode.resolutionErrors().isNotEmpty() -> {
+                                    errored = true
+                                    logger.error(buildString {
+                                        appendLine("[${actualNode.idForBazel}] resolution errors:")
+                                        actualNode.resolutionErrors().forEach { appendLine("- ${it.detailedMessage}") }
+                                    })
+                                }
+                                else -> {
+                                    val children = actualNode.children.filterIsInstance<MavenDependencyNode>()
+                                    queue.addAll(children)
 
-                            val klibs = actualNode.filesMatching(logger) { it.klib() }
-                            logger.info("[${actualNode.idForBazel}] found klibs: $klibs")
-                            val klib = klibs.singleOrNull()
-                                ?: error("Expected exactly one klib for dependency ${actualNode.idForBazel}, got: $klibs")
+                                    val klibs = actualNode.filesMatching(logger) { it.klib() }
+                                    logger.info("[${actualNode.idForBazel}] found klibs: $klibs")
+                                    val klib = klibs.singleOrNull()
+                                        ?: error("Expected exactly one klib for dependency ${actualNode.idForBazel}, got: $klibs")
 
-                            val sourceJars = actualNode.filesMatching(logger) { it.sourceJar() }
-                            logger.info("[${actualNode.idForBazel}] found sourceJars: $sourceJars")
-                            require(sourceJars.size <= 1) { "Expected at most one source jar, found ${sourceJars.size}: $sourceJars" }
-                            val sourceJar = sourceJars.singleOrNull()
+                                    val sourceJars = actualNode.filesMatching(logger) { it.sourceJar() }
+                                    logger.info("[${actualNode.idForBazel}] found sourceJars: $sourceJars")
+                                    require(sourceJars.size <= 1) { "Expected at most one source jar, found ${sourceJars.size}: $sourceJars" }
+                                    val sourceJar = sourceJars.singleOrNull()
 
-                            val (runtimeDeps, compileDeps) = children.partition {
-                                it.dependency.resolutionConfig.scope == ResolutionScope.RUNTIME
+                                    val (runtimeDeps, compileDeps) = children.partition {
+                                        it.dependency.resolutionConfig.scope == ResolutionScope.RUNTIME
+                                    }
+
+                                    val initial by lazy {
+                                        UnresolvedNode(
+                                            id = node.idForBazel,
+                                            variantId = actualNode.idForBazel,
+                                            klib = klib,
+                                            sourceJar = sourceJar,
+                                            dependencies = runtimeDeps.asBazelIds(),
+                                            exportedDependencies = compileDeps.asBazelIds(),
+                                        )
+                                    }
+                                    val existing = resolved[actualNode.idForBazel]
+                                    val updated = existing?.let {
+                                        val exportedDeps = (existing.exportedDependencies + compileDeps.asBazelIds()).toSet()
+                                        val deps =
+                                            (existing.dependencies + runtimeDeps.asBazelIds()).toSet().minus(exportedDeps)
+                                        it.copy(
+                                            dependencies = deps.sorted(),
+                                            exportedDependencies = exportedDeps.sorted(),
+                                        )
+                                    }
+
+                                    resolved[actualNode.idForBazel] = updated ?: initial
+                                }
                             }
-
-                            val initial by lazy {
-                                UnresolvedNode(
-                                    id = node.idForBazel,
-                                    variantId = actualNode.idForBazel,
-                                    klib = klib,
-                                    sourceJar = sourceJar,
-                                    dependencies = runtimeDeps.asBazelIds(),
-                                    exportedDependencies = compileDeps.asBazelIds(),
-                                )
-                            }
-                            val existing = resolved[actualNode.idForBazel]
-                            val updated = existing?.let {
-                                val exportedDeps = (existing.exportedDependencies + compileDeps.asBazelIds()).toSet()
-                                val deps =
-                                    (existing.dependencies + runtimeDeps.asBazelIds()).toSet().minus(exportedDeps)
-                                it.copy(
-                                    dependencies = deps.sorted(),
-                                    exportedDependencies = exportedDeps.sorted(),
-                                )
-                            }
-
-                            resolved[actualNode.idForBazel] = updated ?: initial
                         }
                     }
                 }
